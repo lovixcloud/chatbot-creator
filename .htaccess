@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Route API requests to the PHP front controller on shared Apache hosting.
+RewriteRule ^api(?:/.*)?$ backend/public/index.php [END,QSA]
+
+# Keep backend implementation and seed files outside the public surface.
+RewriteRule ^backend/(?:database|src|vendor)(?:/|$) - [F,L]
+
+# Never expose application secrets or the SQLite database.
+<FilesMatch "^(?:\.env|.*\.sqlite|composer\.(?:json|lock))$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>
