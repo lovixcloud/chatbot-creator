@@ -1,0 +1,158 @@
+/* Responsive Breakpoints & Mobile Drawer */
+
+/* Large Tablets & Laptops */
+@media (max-width: 1120px) {
+  .builder-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .builder-preview {
+    position: relative;
+    top: 0;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .content-body {
+    padding: 24px;
+  }
+}
+
+/* Tablets and Mobile Phones */
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--slate-200);
+    z-index: 100;
+  }
+
+  .brand-header {
+    padding: 12px 16px;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px 12px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: var(--radius-sm);
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .top-bar {
+    padding: 12px 16px;
+    min-height: 52px;
+  }
+
+  .page-title {
+    font-size: 16px;
+  }
+
+  .content-body {
+    padding: 16px;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .builder-panel {
+    padding: 16px;
+  }
+
+  .builder-tabs {
+    padding: 0 8px;
+  }
+
+  .tab-btn {
+    padding: 12px 12px;
+    font-size: 13px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bots-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bot-card {
+    padding: 16px;
+  }
+
+  .builder-preview {
+    padding: 14px;
+    max-width: 100%;
+  }
+
+  .preview-container {
+    height: 480px;
+  }
+
+  /* Adjust header buttons in builder */
+  .builder-header-actions {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 7px 12px;
+    font-size: 12.5px;
+  }
+
+  .tab-btn {
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+
+  .builder-panel {
+    padding: 12px;
+  }
+
+  .preview-container {
+    height: 420px;
+  }
+}

@@ -1,0 +1,7 @@
+/* Widget Layout Tokens and Standalone Styling */
+.widget-demo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
