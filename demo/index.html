@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Integration Showcase & Educational Portal | Zero-Framework</title>
+  <meta name="description" content="Interactive demo simulating a customer website embedding the Zero-Framework customizable chatbot widget, showcasing live event telemetry, knowledge matching, and conversational flows.">
+  <meta name="keywords" content="chatbot demo, widget embedding, live telemetry, zero-framework chatbot, customer support showcase">
+  <meta name="author" content="Chatbot Creator Studio">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <!-- Top Demo Bar -->
+  <header class="demo-header">
+    <div class="demo-brand">
+      <h1 style="font-size: 16px; font-weight: 700;">Nova Commerce & Support Portal</h1>
+      <span class="demo-badge">Live Integration Showcase</span>
+    </div>
+
+    <div class="demo-controls">
+      <label for="botSelector" style="font-size: 13px; font-weight: 600; color: #475569;">Active Assistant:</label>
+      <select id="botSelector" class="demo-select" aria-label="Select Chatbot Configuration"></select>
+
+      <button class="demo-btn" id="btnUploadConfig">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+        Load Custom JSON
+      </button>
+      <input type="file" id="customJsonInput" accept=".json" style="display: none;" />
+
+      <a href="../index.html" class="demo-btn demo-btn-primary">
+        ← Back to Studio
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Demo Layout -->
+  <main class="demo-layout">
+    <!-- Mock Host Website Viewport -->
+    <section class="mock-website">
+      <div class="mock-hero">
+        <h2>Next-Generation Cloud Infrastructure & Hardware</h2>
+        <p>
+          Welcome to Nova Retail. We provide high-availability computing and developer workstations.
+          Use the floating chat assistant in the bottom corner to test real-world customer support,
+          inquire about shipping times, explore return policies, or escalate to human support specialists.
+        </p>
+      </div>
+
+      <div class="mock-cards">
+        <div class="mock-card">
+          <h4>Enterprise Cloud Servers</h4>
+          <p>Deploy low-latency instances globally with 99.99% guaranteed uptime SLA.</p>
+        </div>
+        <div class="mock-card">
+          <h4>Custom Workstations</h4>
+          <p>Configured for deep learning, architectural 3D rendering, and compilation pipelines.</p>
+        </div>
+        <div class="mock-card">
+          <h4>24/7 Priority Support</h4>
+          <p>Instant automated triage backed by tier-3 solutions architects on standby.</p>
+        </div>
+      </div>
+
+      <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px;">
+        <h3 style="font-size: 15px; font-weight: 600; color: #1e40af; margin-bottom: 8px;">How This Mini-App Works</h3>
+        <p style="font-size: 13px; color: #1e3a8a; line-height: 1.5;">
+          This page represents an external customer website embedding the chatbot using our zero-framework async loader.
+          Notice how the floating chat widget is completely isolated in its own Shadow DOM. Styles on this host page do not leak into the chat,
+          and the chat’s custom colors, borders, and animations do not contaminate this website.
+        </p>
+      </div>
+    </section>
+
+    <!-- Educational & Event Logging Sidebar -->
+    <aside class="educational-sidebar">
+      <div class="edu-section">
+        <h3>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          User Experience Tour
+        </h3>
+
+        <div class="edu-tip">
+          <strong>1. Welcome Starters:</strong> When the chat launches, predefined conversation starters let users test common questions with a single tap.
+        </div>
+        <div class="edu-tip">
+          <strong>2. Deterministic FAQ Matching:</strong> Type questions like <em>"What are your hours?"</em> or <em>"Can I return an item?"</em> to see the tokenized scoring algorithm in action.
+        </div>
+        <div class="edu-tip">
+          <strong>3. Interactive Workflows:</strong> Type <em>"submit_ticket"</em> to trigger a multi-step conversation with email validation.
+        </div>
+        <div class="edu-tip">
+          <strong>4. Human Escalation:</strong> Type <em>"agent"</em> or <em>"human"</em> to witness automatic support handoff.
+        </div>
+      </div>
+
+      <div class="edu-section" style="flex: 1; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="margin-bottom: 0;">Live Runtime Telemetry</h3>
+          <button class="demo-btn" id="btnClearLogs" style="font-size: 11px; padding: 2px 8px;">Clear Log</button>
+        </div>
+        <div class="event-log-container" id="eventLogContainer">
+          <div class="log-entry">
+            <span class="log-time">System Ready</span>
+            <span class="log-event">Initialized</span>
+            <span class="log-detail">Select an assistant to inspect real-time conversational processing.</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Dynamic Chatbot Container -->
+  <div id="demo-bot-container"></div>
+
+  <script type="module" src="demo.js"></script>
+</body>
+</html>

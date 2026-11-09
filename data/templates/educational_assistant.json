@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bot_mw7llhaz_84h8i",
+  "name": "Educational Tutor & Course Guide",
+  "description": "Zero-framework customer support chatbot instance.",
+  "status": "draft",
+  "version": 1,
+  "createdAt": "2026-11-08T08:56:22.235Z",
+  "updatedAt": "2026-11-08T08:56:22.235Z",
+  "identity": {
+    "assistantName": "StudyBot",
+    "businessName": "Polymath Academy",
+    "businessCategory": "Online Education",
+    "role": "Learning Mentor",
+    "personality": "friendly",
+    "tone": "empathetic",
+    "avatarUrl": "",
+    "businessLogoUrl": "",
+    "fallbackMessage": "That question isn't in our current lesson syllabus. Ask your instructor during weekly office hours!",
+    "errorMessage": "Course portal connection reset.",
+    "handoffMessage": "Connecting with teaching assistant.",
+    "endingMessage": "Keep up the great study momentum!"
+  },
+  "appearance": {
+    "theme": "light",
+    "position": "bottom-right",
+    "primaryColor": "#ea580c",
+    "secondaryColor": "#c2410c",
+    "backgroundColor": "#ffffff",
+    "textColor": "#1e293b",
+    "userBubbleColor": "#2563eb",
+    "botBubbleColor": "#f1f5f9",
+    "borderRadius": 16,
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "headerTitle": "Educational Tutor & Course Guide",
+    "headerSubtitle": "Online • Typically replies instantly",
+    "launcherIcon": "sparkle",
+    "launcherText": "Study Guide",
+    "customCss": "",
+    "width": 380,
+    "height": 580
+  },
+  "welcomeExperience": {
+    "greeting": "Hello student! 📚 Ready to dive into your courses today? Ask me anything about syllabus or schedules.",
+    "showWelcomeScreen": true,
+    "welcomeTitle": "Welcome to Acme Support",
+    "welcomeSubtitle": "Ask a question or select an option below to get started.",
+    "conversationStarters": [
+      "When are homework assignments due?",
+      "How to access lecture recordings?",
+      "Office hours schedule"
+    ],
+    "askUserName": false,
+    "askUserEmail": false,
+    "consentMessage": "By chatting, you consent to our privacy policy."
+  },
+  "knowledgeBase": [
+    {
+      "id": "kb_office_hours",
+      "question": "When are instructor office hours?",
+      "answer": "Office hours are held every Tuesday and Thursday from 4:00 PM to 6:00 PM EST via the Zoom link in the student portal.",
+      "category": "Schedule",
+      "keywords": [
+        "office",
+        "hours",
+        "instructor",
+        "tutor",
+        "zoom",
+        "help"
+      ],
+      "priority": 5
+    }
+  ],
+  "conversationFlows": [
+    {
+      "id": "flow_support_ticket",
+      "title": "Submit Support Ticket",
+      "trigger": {
+        "type": "button",
+        "value": "submit_ticket"
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "type": "question",
+          "text": "I would be happy to help you create a ticket. What issue are you experiencing today?",
+          "nextStepId": "step_2"
+        },
+        {
+          "id": "step_2",
+          "type": "input_capture",
+          "inputType": "email",
+          "variableName": "user_email",
+          "text": "Thanks! What is your email address so our team can follow up with you?",
+          "nextStepId": "step_3"
+        },
+        {
+          "id": "step_3",
+          "type": "message",
+          "text": "Got it! Your inquiry has been forwarded to our support queue. An agent will respond within 24 hours.",
+          "nextStepId": "end"
+        }
+      ]
+    }
+  ],
+  "businessRules": {
+    "timezone": "UTC",
+    "operatingHours": {
+      "enabled": false,
+      "schedule": {
+        "monday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "tuesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "wednesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "thursday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "friday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "saturday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        },
+        "sunday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        }
+      },
+      "afterHoursMessage": "We are currently outside our standard business hours. Leave your email and question, and we will reply as soon as we open!"
+    },
+    "confidenceThreshold": 0.35,
+    "maxHistoryItems": 30,
+    "rateLimitPerMinute": 20
+  },
+  "humanHandoff": {
+    "enabled": true,
+    "mode": "email",
+    "destinationEmail": "support@example.com",
+    "supportUrl": "https://example.com/support",
+    "autoEscalateKeywords": [
+      "agent",
+      "human",
+      "representative",
+      "operator",
+      "supervisor"
+    ],
+    "consecutiveFallbacksBeforeHandoff": 2
+  },
+  "localization": {
+    "defaultLanguage": "en",
+    "supportedLanguages": [
+      "en",
+      "es",
+      "fr",
+      "de"
+    ],
+    "translations": {
+      "en": {
+        "placeholder": "Type your message...",
+        "send": "Send",
+        "restart": "Restart conversation",
+        "poweredBy": "Zero-Framework Chatbot"
+      },
+      "es": {
+        "placeholder": "Escribe tu mensaje...",
+        "send": "Enviar",
+        "restart": "Reiniciar conversación",
+        "poweredBy": "Chatbot Creador"
+      }
+    }
+  },
+  "integrations": {
+    "website": {
+      "enabled": true,
+      "allowedDomains": [
+        "*"
+      ],
+      "requireDomainValidation": false
+    },
+    "telegram": {
+      "enabled": false,
+      "botUsername": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "phoneNumberId": "",
+      "businessAccountId": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "webhook": {
+      "enabled": false,
+      "endpointUrl": "",
+      "method": "POST",
+      "events": [
+        "on_message",
+        "on_handoff"
+      ],
+      "customHeaders": {}
+    }
+  },
+  "privacy": {
+    "sessionPersistence": "session",
+    "retentionDays": 30,
+    "collectAnalytics": true,
+    "maskPii": false,
+    "privacyPolicyUrl": "https://example.com/privacy"
+  }
+}

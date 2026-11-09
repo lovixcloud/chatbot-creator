@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Installation & CMS Guide | Zero-Framework Chatbot Documentation</title>
+  <meta name="description" content="Instructions for embedding chatbots into HTML, WordPress, Shopify, and GitHub Pages.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <a href="../index.html" class="docs-brand">
+        <div class="brand-icon">C</div>
+        <div>
+          <strong style="display:block; font-size: 14px;">Chatbot Studio</strong>
+          <span style="font-size: 11px; color: var(--slate-500);">Documentation Center</span>
+        </div>
+      </a>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Guides &amp; References</div>
+        <ul class="docs-nav-list">
+          <li><a href="index.html" class="docs-nav-link">Documentation Home</a></li>
+          <li><a href="developer-guide.html" class="docs-nav-link">Developer Technical Guide</a></li>
+<li><a href="chatbot-owner-guide.html" class="docs-nav-link">Chatbot Owner Handbook</a></li>
+<li><a href="installation-guide.html" class="docs-nav-link">Website Installation & CMS Guide</a></li>
+<li><a href="integration-guide.html" class="docs-nav-link">Multi-Channel Integration Guide</a></li>
+<li><a href="configuration-reference.html" class="docs-nav-link">Configuration Schema Reference</a></li>
+<li><a href="api-reference.html" class="docs-nav-link">JavaScript API Reference</a></li>
+<li><a href="security-and-privacy.html" class="docs-nav-link">Security, CSP & Privacy Guide</a></li>
+<li><a href="troubleshooting.html" class="docs-nav-link">Troubleshooting & Diagnostics</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color);">
+        <a href="../index.html" class="btn-back">← Back to Studio</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <div class="docs-topbar">
+        <div style="font-size: 13px; color: var(--slate-500);">
+          <a href="index.html" style="color: inherit; text-decoration: none;">Docs</a> &gt; <span>Website Installation & CMS Guide</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="INSTALLATION-GUIDE.md" class="btn-github-md" target="_blank" title="View raw Markdown file for developers">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            View .MD
+          </a>
+          <a href="../index.html" class="btn-back">Studio</a>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>Website Installation &amp; CMS Embedding Guide</h1>
+<p>This guide explains how to install your published chatbot widget onto common website platforms and Content Management Systems.</p>
+<hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
+<h2>1. The Standard Embedding Snippets</h2>
+<h3>Option A: Universal Zero-Dependency Embed (Recommended)</h3>
+<p>Guaranteed to display on any third-party website, CMS, or static host immediately without requiring an external database, API server, or shared browser storage:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>&lt;!-- Universal Zero-Framework Custom Chatbot Widget --&gt;
+&lt;script
+  src=&quot;https://YOUR-DOMAIN.com/chatbot/loader.js&quot;
+  data-chatbot-id=&quot;YOUR-CHATBOT-ID&quot;
+  data-chatbot-data=&quot;ENCODED_BOT_CONFIGURATION&quot;
+  async
+&gt;&lt;/script&gt;</code></pre></div>
+<h3>Option B: Dynamic Cloud Loader</h3>
+<p>Loads configuration dynamically from your origin server, CDN, or serverless API:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>&lt;script
+  src=&quot;https://YOUR-DOMAIN.com/chatbot/loader.js&quot;
+  data-chatbot-id=&quot;YOUR-CHATBOT-ID&quot;
+  data-config-url=&quot;https://YOUR-DOMAIN.com/data/templates/YOUR-CHATBOT-ID.json&quot;
+  async
+&gt;&lt;/script&gt;</code></pre></div>
+<h3>Script Tag Attributes</h3>
+<li><code>src</code>: URL to <code>loader.js</code> hosted on your static server or CDN.</li>
+<li><code>data-chatbot-id</code>: The unique ID of the chatbot configured in the studio.</li>
+<li><code>data-chatbot-data</code>: Full serialized chatbot configuration (URI-encoded or base64), eliminating database lookup latency and cross-domain storage boundaries.</li>
+<li><code>data-config-url</code>: (Optional) Remote URL to fetch JSON configuration dynamically.</li>
+<li><code>async</code>: Loads the script in the background without delaying initial page render.</li>
+<hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
+<h2>2. Platform-Specific Instructions</h2>
+<h3>HTML5 Static Websites</h3>
+<p>Paste the script tag directly before the closing <code>&lt;/body&gt;</code> tag of your HTML pages.</p>
+<h3>WordPress</h3>
+<li>In WordPress Admin, navigate to <strong>Plugins &gt; Add New</strong>.</li>
+<li>Search for and install <strong>WPCode</strong> (or any header/footer injection plugin).</li>
+<li>Go to <strong>Code Snippets &gt; Header &amp; Footer</strong>.</li>
+<li>Paste the snippet into the <strong>Footer</strong> section.</li>
+<li>Save changes.</li>
+<h3>Shopify Storefronts</h3>
+<li>Go to <strong>Online Store &gt; Themes</strong>.</li>
+<li>Click <strong>... &gt; Edit code</strong>.</li>
+<li>In the layout folder, open <code>theme.liquid</code>.</li>
+<li>Scroll to the bottom and paste the snippet above the <code>&lt;/body&gt;</code> tag.</li>
+<li>Click <strong>Save</strong>.</li>
+<h3>GitHub Pages, Netlify &amp; Cloudflare Pages</h3>
+<p>Commit the script tag into your root <code>index.html</code> file and push changes to your Git repository.</p>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    // Copy code button script
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.nextElementSibling;
+        const text = pre ? pre.innerText : '';
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          btn.classList.add('copied');
+          btn.innerText = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = 'Copy';
+          }, 2000);
+        } catch(e) {
+          console.error(e);
+        }
+      });
+    });
+
+    // Highlight active sidebar link
+    document.querySelectorAll('.docs-nav-link').forEach(link => {
+      if (link.getAttribute('href') === 'installation-guide.html') {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

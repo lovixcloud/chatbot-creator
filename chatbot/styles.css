@@ -1,0 +1,5 @@
+/* Base styles for standalone or preview chatbot runtime */
+:root {
+  --cb-primary: #2563eb;
+  --cb-radius: 16px;
+}

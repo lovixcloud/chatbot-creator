@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bot_mw7llhb1_p7i6e",
+  "name": "Aura Style Concierge",
+  "description": "Zero-framework customer support chatbot instance.",
+  "status": "draft",
+  "version": 1,
+  "createdAt": "2026-11-08T08:56:22.237Z",
+  "updatedAt": "2026-11-08T08:56:22.237Z",
+  "identity": {
+    "assistantName": "Aura Style Concierge",
+    "businessName": "Acme Enterprise",
+    "businessCategory": "Customer Service",
+    "role": "Support Representative",
+    "personality": "professional",
+    "tone": "empathetic",
+    "avatarUrl": "",
+    "businessLogoUrl": "",
+    "fallbackMessage": "I'm sorry, I don't have an exact answer for that right now. Would you like me to connect you with our human support team?",
+    "errorMessage": "I encountered a minor system issue. Please try your question again.",
+    "handoffMessage": "Connecting you with our support specialist. Please hold on.",
+    "endingMessage": "Thank you for chatting with us today. Have a wonderful day!"
+  },
+  "appearance": {
+    "theme": "light",
+    "position": "bottom-right",
+    "primaryColor": "#2563eb",
+    "secondaryColor": "#1e40af",
+    "backgroundColor": "#ffffff",
+    "textColor": "#1e293b",
+    "userBubbleColor": "#2563eb",
+    "botBubbleColor": "#f1f5f9",
+    "borderRadius": 16,
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "headerTitle": "Aura Style Concierge",
+    "headerSubtitle": "Online • Typically replies instantly",
+    "launcherIcon": "chat",
+    "launcherText": "Chat with us",
+    "customCss": "",
+    "width": 380,
+    "height": 580
+  },
+  "welcomeExperience": {
+    "greeting": "Hello! 👋 Welcome to our support center. How can we assist you today?",
+    "showWelcomeScreen": true,
+    "welcomeTitle": "Welcome to Acme Support",
+    "welcomeSubtitle": "Ask a question or select an option below to get started.",
+    "conversationStarters": [
+      "What are your business hours?",
+      "How can I track my order?",
+      "Talk to a human representative"
+    ],
+    "askUserName": false,
+    "askUserEmail": false,
+    "consentMessage": "By chatting, you consent to our privacy policy."
+  },
+  "knowledgeBase": [
+    {
+      "id": "faq_hours",
+      "question": "What are your business hours?",
+      "answer": "We are open Monday through Friday, 9:00 AM to 6:00 PM EST. Our automated assistant is available 24/7!",
+      "category": "General",
+      "keywords": [
+        "hours",
+        "open",
+        "timing",
+        "schedule",
+        "weekend",
+        "work"
+      ],
+      "alternativePhrasings": [
+        "When are you open?",
+        "What time do you close?",
+        "Working hours"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "faq_contact",
+      "question": "How do I contact customer support?",
+      "answer": "You can email our support team at support@example.com or phone us at +1 (800) 555-0199.",
+      "category": "Support",
+      "keywords": [
+        "contact",
+        "email",
+        "phone",
+        "call",
+        "reach",
+        "human"
+      ],
+      "alternativePhrasings": [
+        "Can I speak to someone?",
+        "Support phone number",
+        "Email address"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "faq_refund",
+      "question": "What is your refund policy?",
+      "answer": "We offer a 30-day money-back guarantee on all our standard products. Simply submit your receipt to refunds@example.com.",
+      "category": "Billing",
+      "keywords": [
+        "refund",
+        "return",
+        "money back",
+        "cancel",
+        "guarantee"
+      ],
+      "alternativePhrasings": [
+        "Can I get a refund?",
+        "How do returns work?"
+      ],
+      "priority": 4
+    }
+  ],
+  "conversationFlows": [
+    {
+      "id": "flow_support_ticket",
+      "title": "Submit Support Ticket",
+      "trigger": {
+        "type": "button",
+        "value": "submit_ticket"
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "type": "question",
+          "text": "I would be happy to help you create a ticket. What issue are you experiencing today?",
+          "nextStepId": "step_2"
+        },
+        {
+          "id": "step_2",
+          "type": "input_capture",
+          "inputType": "email",
+          "variableName": "user_email",
+          "text": "Thanks! What is your email address so our team can follow up with you?",
+          "nextStepId": "step_3"
+        },
+        {
+          "id": "step_3",
+          "type": "message",
+          "text": "Got it! Your inquiry has been forwarded to our support queue. An agent will respond within 24 hours.",
+          "nextStepId": "end"
+        }
+      ]
+    }
+  ],
+  "businessRules": {
+    "timezone": "UTC",
+    "operatingHours": {
+      "enabled": false,
+      "schedule": {
+        "monday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "tuesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "wednesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "thursday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "friday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "saturday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        },
+        "sunday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        }
+      },
+      "afterHoursMessage": "We are currently outside our standard business hours. Leave your email and question, and we will reply as soon as we open!"
+    },
+    "confidenceThreshold": 0.35,
+    "maxHistoryItems": 30,
+    "rateLimitPerMinute": 20
+  },
+  "humanHandoff": {
+    "enabled": true,
+    "mode": "email",
+    "destinationEmail": "support@example.com",
+    "supportUrl": "https://example.com/support",
+    "autoEscalateKeywords": [
+      "agent",
+      "human",
+      "representative",
+      "operator",
+      "supervisor"
+    ],
+    "consecutiveFallbacksBeforeHandoff": 2
+  },
+  "localization": {
+    "defaultLanguage": "en",
+    "supportedLanguages": [
+      "en",
+      "es",
+      "fr",
+      "de"
+    ],
+    "translations": {
+      "en": {
+        "placeholder": "Type your message...",
+        "send": "Send",
+        "restart": "Restart conversation",
+        "poweredBy": "Zero-Framework Chatbot"
+      },
+      "es": {
+        "placeholder": "Escribe tu mensaje...",
+        "send": "Enviar",
+        "restart": "Reiniciar conversación",
+        "poweredBy": "Chatbot Creador"
+      }
+    }
+  },
+  "integrations": {
+    "website": {
+      "enabled": true,
+      "allowedDomains": [
+        "*"
+      ],
+      "requireDomainValidation": false
+    },
+    "telegram": {
+      "enabled": false,
+      "botUsername": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "phoneNumberId": "",
+      "businessAccountId": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "webhook": {
+      "enabled": false,
+      "endpointUrl": "",
+      "method": "POST",
+      "events": [
+        "on_message",
+        "on_handoff"
+      ],
+      "customHeaders": {}
+    }
+  },
+  "privacy": {
+    "sessionPersistence": "session",
+    "retentionDays": 30,
+    "collectAnalytics": true,
+    "maskPii": false,
+    "privacyPolicyUrl": "https://example.com/privacy"
+  }
+}

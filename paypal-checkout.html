@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayPal Sandbox Checkout Simulator</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fb; color: #172033; margin: 0; padding: 32px; }
+    main { max-width: 460px; margin: 8vh auto; background: #fff; border: 1px solid #dbe2ef; border-radius: 12px; padding: 28px; box-shadow: 0 8px 24px #17203318; }
+    .paypal { color: #003087; font-size: 1.5rem; font-weight: 700; }
+    button { width: 100%; border: 0; border-radius: 6px; padding: 12px; margin-top: 10px; font-weight: 700; cursor: pointer; }
+    #approve { background: #ffc439; color: #111; } #cancel { background: #e8edf5; color: #172033; }
+    #message { min-height: 24px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="paypal">PayPal Sandbox</div>
+    <h1>Checkout simulator</h1>
+    <p>This local simulator represents the PayPal sandbox approval screen. No real money is charged.</p>
+    <p id="order"></p>
+    <button id="approve">Approve payment</button>
+    <button id="cancel">Cancel</button>
+    <div id="message" role="status"></div>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order_id');
+    const planId = params.get('plan_id');
+    const billingCycle = params.get('billing_cycle') || 'monthly';
+    const isLocalDevelopment = ['3000', '8080'].includes(window.location.port);
+    const configuredApiBase = localStorage.getItem('chatbot_studio_api_url');
+    const configuredUrl = configuredApiBase ? new URL(configuredApiBase, window.location.href) : null;
+    const staleLocalApiUrl = configuredUrl &&
+      configuredUrl.hostname === window.location.hostname &&
+      configuredUrl.port === '8000' &&
+      !isLocalDevelopment;
+    const apiBase = (staleLocalApiUrl ? null : configuredApiBase) ||
+      (isLocalDevelopment
+        ? `${window.location.protocol}//${window.location.hostname || 'localhost'}:8000`
+        : new URL('./', window.location.href).href.replace(/\/+$/, ''));
+    const token = localStorage.getItem('chatbot_studio_auth_token');
+    const message = document.getElementById('message');
+    document.getElementById('order').textContent = orderId ? `Order: ${orderId}` : 'Invalid checkout order.';
+
+    document.getElementById('approve').addEventListener('click', async () => {
+      if (!orderId || !planId || !token) {
+        message.textContent = 'This checkout session is invalid or has expired.';
+        return;
+      }
+      message.textContent = 'Capturing payment...';
+      try {
+        const response = await fetch(`${apiBase}/api/subscription/capture`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ order_id: orderId, plan_id: planId, billing_cycle: billingCycle })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Payment capture failed.');
+        message.textContent = 'Payment approved. Your plan is now active.';
+        setTimeout(() => { window.location.href = './index.html'; }, 1200);
+      } catch (error) {
+        message.textContent = error.message;
+      }
+    });
+
+    document.getElementById('cancel').addEventListener('click', () => {
+      window.location.href = './index.html';
+    });
+  </script>
+</body>
+</html>

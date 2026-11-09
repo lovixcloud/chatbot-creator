@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Owner Handbook | Zero-Framework Chatbot Documentation</title>
+  <meta name="description" content="End-user guide to creating, customizing, testing, and embedding chatbots.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <a href="../index.html" class="docs-brand">
+        <div class="brand-icon">C</div>
+        <div>
+          <strong style="display:block; font-size: 14px;">Chatbot Studio</strong>
+          <span style="font-size: 11px; color: var(--slate-500);">Documentation Center</span>
+        </div>
+      </a>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Guides &amp; References</div>
+        <ul class="docs-nav-list">
+          <li><a href="index.html" class="docs-nav-link">Documentation Home</a></li>
+          <li><a href="developer-guide.html" class="docs-nav-link">Developer Technical Guide</a></li>
+<li><a href="chatbot-owner-guide.html" class="docs-nav-link">Chatbot Owner Handbook</a></li>
+<li><a href="installation-guide.html" class="docs-nav-link">Website Installation & CMS Guide</a></li>
+<li><a href="integration-guide.html" class="docs-nav-link">Multi-Channel Integration Guide</a></li>
+<li><a href="configuration-reference.html" class="docs-nav-link">Configuration Schema Reference</a></li>
+<li><a href="api-reference.html" class="docs-nav-link">JavaScript API Reference</a></li>
+<li><a href="security-and-privacy.html" class="docs-nav-link">Security, CSP & Privacy Guide</a></li>
+<li><a href="troubleshooting.html" class="docs-nav-link">Troubleshooting & Diagnostics</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color);">
+        <a href="../index.html" class="btn-back">← Back to Studio</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <div class="docs-topbar">
+        <div style="font-size: 13px; color: var(--slate-500);">
+          <a href="index.html" style="color: inherit; text-decoration: none;">Docs</a> &gt; <span>Chatbot Owner Handbook</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="CHATBOT-OWNER-GUIDE.md" class="btn-github-md" target="_blank" title="View raw Markdown file for developers">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            View .MD
+          </a>
+          <a href="../index.html" class="btn-back">Studio</a>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>Chatbot Owner &amp; Administrator Guide</h1>
+<h2>1. Introduction to the Chatbot Creator</h2>
+<p>Welcome to the <strong>Chatbot Creator Studio</strong>! This platform allows you to design, customize, test, and deploy modern customer support chatbots for your websites and messaging channels without writing complex code or paying high monthly subscription fees.</p>
+<h2>2. Understanding the Dashboard</h2>
+<p>When you launch the studio, you will see the <strong>Platform Overview</strong>:</p>
+<li><strong>Total Chatbots</strong>: Number of bots created in your workspace.</li>
+<li><strong>Published Live</strong>: Number of chatbots active on websites or channels.</li>
+<li><strong>Draft Assistants</strong>: Chatbots currently undergoing configuration.</li>
+<li><strong>Production Templates</strong>: Built-in specialized industry assistants ready to deploy.</li>
+<h2>3. Creating an Account or Starting in Standalone Mode</h2>
+<p>The studio runs directly in your web browser. There is no account registration required to begin. Your chatbots, configurations, and drafts are saved securely in your browser&#x27;s IndexedDB storage. You can export complete backups at any time.</p>
+<h2>4. Creating Your First Chatbot</h2>
+<li>Click <strong>+ New Chatbot</strong> in the sidebar or overview screen.</li>
+<li>Select <strong>Start Blank</strong> or pick one of the 8 pre-configured templates.</li>
+<li>Your new chatbot is created immediately, and you will be redirected to the Studio Builder.</li>
+<h2>5. Choosing a Chatbot Template</h2>
+<p>Choose from industry-tuned templates:</p>
+<li><strong>Customer Support</strong>: Resolves common questions and handles human escalation.</li>
+<li><strong>Instant FAQ Bot</strong>: Answers pricing and policy questions quickly.</li>
+<li><strong>E-Commerce Assistant</strong>: Promotes discounts and provides shipping info.</li>
+<li><strong>Lead Qualification</strong>: Captures inbound business inquiries and emails.</li>
+<li><strong>Booking &amp; Appointment</strong>: Explains clinic/consultation booking procedures.</li>
+<li><strong>Technical Support</strong>: Assists developers with API documentation.</li>
+<li><strong>Business Info</strong>: Corporate directory and office directions.</li>
+<li><strong>Educational Tutor</strong>: Homework and office hours helper.</li>
+<h2>6. Configuring the Assistant&#x27;s Identity</h2>
+<p>Under the <strong>Identity &amp; Tone</strong> tab:</p>
+<li><strong>Assistant Name</strong>: Name displayed in the chat header (e.g., &quot;Sarah from Acme&quot;).</li>
+<li><strong>Business Name</strong>: Your company or organization name.</li>
+<li><strong>Personality</strong>: Choose between *Friendly*, *Professional*, *Conversational*, *Technical*, or *Casual*.</li>
+<li><strong>Fallback Message</strong>: Message spoken when the bot cannot match an answer.</li>
+<li><strong>Human Handoff Message</strong>: Notice displayed when transferring to a human specialist.</li>
+<h2>7. Customizing the Chatbot&#x27;s Appearance</h2>
+<p>Under the <strong>Appearance</strong> tab:</p>
+<li><strong>Primary Brand Color</strong>: Match your website&#x27;s primary theme.</li>
+<li><strong>Theme</strong>: Select *Light* or *Dark* mode.</li>
+<li><strong>Position</strong>: Place the launcher in the *Bottom Right* or *Bottom Left*.</li>
+<li><strong>Launcher Text</strong>: Text shown on the floating button (e.g., &quot;Chat with us&quot;).</li>
+<li><strong>Custom CSS</strong>: Add optional custom styles without affecting your main website.</li>
+<h2>8. Setting Welcome Messages</h2>
+<p>Under the <strong>Welcome &amp; Greeting</strong> tab:</p>
+<li>Set your opening greeting message.</li>
+<li>Add <strong>Conversation Starters</strong> (one question per line). These appear as interactive clickable buttons when visitors open the chat.</li>
+<h2>9. Adding Frequently Asked Questions (FAQs)</h2>
+<p>Under the <strong>Knowledge Base</strong> tab:</p>
+<li>Click <strong>+ Add Question</strong>.</li>
+<li>Enter the Question (e.g., &quot;What is your refund policy?&quot;).</li>
+<li>Enter the verified Answer.</li>
+<li>Add relevant search keywords separated by commas (e.g., &quot;refund, return, money back&quot;).</li>
+<li>Save the entry.</li>
+<h2>10. Importing Business Knowledge</h2>
+<li>You can export your FAQ dataset as a CSV file using <strong>Export CSV</strong>.</li>
+<li>Edit questions in Microsoft Excel or Google Sheets, then import them directly.</li>
+<h2>11. Configuring Conversation Workflows</h2>
+<p>Workflows guide visitors through multi-step forms. For example:</p>
+<li>Asking for a visitor&#x27;s name.</li>
+<li>Capturing their verified email address.</li>
+<li>Logging their support ticket.</li>
+<h2>12. Creating Quick Replies</h2>
+<p>Quick replies are buttons presented under a bot response that allow the user to tap an option rather than typing manually.</p>
+<h2>13. Configuring Business Hours</h2>
+<p>Under the <strong>Business Rules</strong> tab:</p>
+<li>Enable business hours enforcement.</li>
+<li>Specify your weekly schedule.</li>
+<li>When closed, the bot automatically presents your <strong>After-Hours Message</strong>.</li>
+<h2>14. Setting Up Customer Support Handoff</h2>
+<p>Under the <strong>Human Handoff</strong> tab:</p>
+<li>Enable human escalation.</li>
+<li>Set trigger keywords (e.g., &quot;human, agent, representative&quot;).</li>
+<li>Set notification destination email or support ticket link.</li>
+<h2>15. Selecting Supported Languages</h2>
+<p>Configure interface language strings and localized replies under the localization section.</p>
+<h2>16. Testing the Chatbot</h2>
+<p>Every change you make updates the <strong>Live Assistant Preview</strong> in the right column of the Studio in real time. Test asking questions, clicking conversation starter buttons, and verifying fallback messages.</p>
+<h2>17. Publishing the Chatbot</h2>
+<p>When satisfied with your changes:</p>
+<li>Click the blue <strong>Publish Chatbot</strong> button.</li>
+<li>The bot version increments, and the configuration is published.</li>
+<h2>18. Installing on a Standard HTML Website</h2>
+<p>In the <strong>Publish &amp; Embed</strong> tab in the Chatbot Studio, you have two embed options:</p>
+<h3>Option 1: Universal Zero-Dependency Embed (Recommended)</h3>
+<p>This self-contained snippet includes your customized knowledge base and settings directly in the script tag. It is guaranteed to display immediately on any website without needing a database or backend server:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>&lt;!-- Universal Zero-Framework Custom Chatbot Embed --&gt;
+&lt;script
+  src=&quot;https://your-domain.com/chatbot/loader.js&quot;
+  data-chatbot-id=&quot;your-chatbot-id&quot;
+  data-chatbot-data=&quot;ENCODED_BOT_CONFIGURATION&quot;
+  async
+&gt;&lt;/script&gt;</code></pre></div>
+<h3>Option 2: Dynamic Cloud Loader Snippet</h3>
+<p>For configurations hosted in your serverless backend or static repository:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>&lt;script
+  src=&quot;https://your-domain.com/chatbot/loader.js&quot;
+  data-chatbot-id=&quot;your-chatbot-id&quot;
+  data-config-url=&quot;https://your-domain.com/data/templates/your-chatbot-id.json&quot;
+  async
+&gt;&lt;/script&gt;</code></pre></div>
+<p>Paste either snippet right before the closing <code>&lt;/body&gt;</code> tag of your HTML pages.</p>
+<h2>19. Installing on WordPress</h2>
+<li>Log into your WordPress Admin Dashboard.</li>
+<li>Go to <strong>Appearance &gt; Theme File Editor</strong> (or use an &quot;Insert Headers and Footers&quot; plugin).</li>
+<li>Paste the installation snippet before the closing <code>&lt;/body&gt;</code> tag in <code>footer.php</code>.</li>
+<li>Click <strong>Update File</strong>.</li>
+<h2>20. Installing on Shopify</h2>
+<li>In Shopify Admin, navigate to <strong>Online Store &gt; Themes</strong>.</li>
+<li>Click <strong>Actions &gt; Edit Code</strong>.</li>
+<li>Open <code>theme.liquid</code>.</li>
+<li>Paste the snippet immediately before <code>&lt;/body&gt;</code>.</li>
+<li>Click <strong>Save</strong>.</li>
+<h2>21. Integrating with GitHub Pages &amp; Static Websites</h2>
+<p>Add the snippet directly to your <code>index.html</code> file before pushing to GitHub Pages, Cloudflare Pages, or Netlify.</p>
+<h2>22. Configuring WhatsApp</h2>
+<li>Create a Meta Developer App and select WhatsApp Business Platform.</li>
+<li>Obtain your <strong>Phone Number ID</strong> and <strong>System User Access Token</strong>.</li>
+<li>Configure the webhook in Meta Developer portal pointing to your serverless bridge URL (<code>https://your-bridge.com/webhook/whatsapp</code>).</li>
+<li>Enter your Verify Token.</li>
+<h2>23. Configuring Telegram</h2>
+<li>Open Telegram and message <code>@BotFather</code>.</li>
+<li>Create a new bot and copy the API token.</li>
+<li>Set your webhook with secret token:</li>
+<p>   <code>https://api.telegram.org/bot&lt;TOKEN&gt;/setWebhook?url=https://your-bridge.com/webhook/telegram&amp;secret_token=&lt;SECRET&gt;</code></p>
+<li>Enter the bot username in the Integrations panel.</li>
+<h2>24. Understanding Third-Party Integrations</h2>
+<p>External messaging platforms require an intermediate serverless bridge to protect API credentials. Never place your WhatsApp token or Telegram bot token in public website HTML.</p>
+<h2>25. Managing Multiple Chatbots</h2>
+<p>Manage an unlimited number of bots from the <strong>My Chatbots</strong> screen. Duplicate bots to test different personalities or deploy unique bots on different subdomains.</p>
+<h2>26. Exporting and Backing Up Configurations</h2>
+<p>Click the <strong>Export</strong> button on any chatbot card to download a <code>.json</code> backup file. Store this file safely to restore or transfer bots across computers.</p>
+<h2>27. Updating Published Chatbots</h2>
+<p>When you update FAQs or greeting messages, simply click <strong>Publish Chatbot</strong>. Visitors will immediately receive the new configuration without requiring you to reinstall website script tags.</p>
+<h2>28. Privacy Settings</h2>
+<p>Configure whether chat messages persist across browser tabs or are erased when the tab closes.</p>
+<h2>29. Troubleshooting</h2>
+<p>If the widget does not appear:</p>
+<li>Check that the script URL is reachable.</li>
+<li>Check browser console for domain authorization errors.</li>
+<li>Confirm that the chatbot status is <strong>Published</strong>.</li>
+<h2>30. Frequently Asked Questions</h2>
+<p><strong>Q: Do I need to pay monthly fees for this chatbot?</strong>  </p>
+<p>A: No. The platform is completely self-contained and zero-framework. Hosting costs on static providers like GitHub Pages are free.</p>
+<p><strong>Q: Will the chatbot slow down my website?</strong>  </p>
+<p>A: No. The loader script loads asynchronously (<code>async</code>) and weighs less than 35KB, ensuring fast page load speeds.</p>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    // Copy code button script
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.nextElementSibling;
+        const text = pre ? pre.innerText : '';
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          btn.classList.add('copied');
+          btn.innerText = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = 'Copy';
+          }, 2000);
+        } catch(e) {
+          console.error(e);
+        }
+      });
+    });
+
+    // Highlight active sidebar link
+    document.querySelectorAll('.docs-nav-link').forEach(link => {
+      if (link.getAttribute('href') === 'chatbot-owner-guide.html') {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

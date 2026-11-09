@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Technical Guide | Zero-Framework Chatbot Documentation</title>
+  <meta name="description" content="Core system architecture, knowledge algorithms, and zero-framework implementation details.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <a href="../index.html" class="docs-brand">
+        <div class="brand-icon">C</div>
+        <div>
+          <strong style="display:block; font-size: 14px;">Chatbot Studio</strong>
+          <span style="font-size: 11px; color: var(--slate-500);">Documentation Center</span>
+        </div>
+      </a>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Guides &amp; References</div>
+        <ul class="docs-nav-list">
+          <li><a href="index.html" class="docs-nav-link">Documentation Home</a></li>
+          <li><a href="developer-guide.html" class="docs-nav-link">Developer Technical Guide</a></li>
+<li><a href="chatbot-owner-guide.html" class="docs-nav-link">Chatbot Owner Handbook</a></li>
+<li><a href="installation-guide.html" class="docs-nav-link">Website Installation & CMS Guide</a></li>
+<li><a href="integration-guide.html" class="docs-nav-link">Multi-Channel Integration Guide</a></li>
+<li><a href="configuration-reference.html" class="docs-nav-link">Configuration Schema Reference</a></li>
+<li><a href="api-reference.html" class="docs-nav-link">JavaScript API Reference</a></li>
+<li><a href="security-and-privacy.html" class="docs-nav-link">Security, CSP & Privacy Guide</a></li>
+<li><a href="troubleshooting.html" class="docs-nav-link">Troubleshooting & Diagnostics</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color);">
+        <a href="../index.html" class="btn-back">← Back to Studio</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <div class="docs-topbar">
+        <div style="font-size: 13px; color: var(--slate-500);">
+          <a href="index.html" style="color: inherit; text-decoration: none;">Docs</a> &gt; <span>Developer Technical Guide</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="DEVELOPER-GUIDE.md" class="btn-github-md" target="_blank" title="View raw Markdown file for developers">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            View .MD
+          </a>
+          <a href="../index.html" class="btn-back">Studio</a>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>Developer Guide: Zero-Framework Customizable Chatbot Creator Micro-SaaS</h1>
+<h2>1. Product Overview</h2>
+<p>The <strong>Chatbot Creator Micro-SaaS Platform</strong> is an enterprise-grade, lightweight conversational assistant studio and runtime engine engineered entirely without front-end or back-end frameworks. It enables entrepreneurs, agencies, and businesses to build, customize, test, and deploy production-ready customer support chatbots with zero compilation or heavy server infrastructure.</p>
+<h2>2. System Architecture</h2>
+<p>The platform is organized into distinct decoupled architectural layers:</p>
+<li><strong>Administrative Studio UI (<code>index.html</code>, <code>assets/</code>)</strong>: Client-side single page application operating with native ES Modules, hash routing, and reactive state management.</li>
+<li><strong>Chatbot Runtime Engine (<code>chatbot/runtime.js</code>)</strong>: Independent conversational execution engine managing session context, business rules, deterministic FAQ matching, and workflows.</li>
+<li><strong>Shadow DOM Renderer (<code>chatbot/renderer.js</code>)</strong>: Completely isolates chatbot widget CSS, markup, and event handlers from host websites.</li>
+<li><strong>Multi-Channel Adapter Engine (<code>chatbot/adapters/</code>)</strong>: Standardized abstraction contract connecting the core conversation engine to Website, Telegram, WhatsApp Cloud API, and Generic Webhooks.</li>
+<li><strong>Serverless Integration Bridge (<code>integrations/serverless/</code>)</strong>: Isolated minimal Node.js/edge execution layer that securely manages privileged API secrets and handles webhooks.</li>
+<h2>3. Zero-Framework Development Philosophy</h2>
+<li>Zero build tools (No Webpack, Vite, Parcel, or Rollup).</li>
+<li>Zero external CSS or JavaScript libraries (No React, Vue, jQuery, Bootstrap, or Tailwind).</li>
+<li>Native browser APIs utilized for DOM management, fetch operations, custom elements, Shadow DOM, and IndexedDB storage.</li>
+<li>Standard JSON schema for all configuration exchange and storage.</li>
+<h2>4. Technology Choices</h2>
+<li><strong>HTML5 &amp; CSS3</strong>: Native CSS custom properties, grid layouts, animations, and container isolation.</li>
+<li><strong>Vanilla ECMAScript Modules</strong>: Native browser <code>import</code>/<code>export</code> semantics.</li>
+<li><strong>IndexedDB &amp; LocalStorage</strong>: Resilient two-tiered offline storage mechanism.</li>
+<li><strong>Native Node.js (v18+)</strong>: Utilized strictly for running optional serverless integration webhooks and standalone CLI tests.</li>
+<h2>5. Project Structure</h2>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>chatbot-creator/
+├── index.html                     # Studio application entry point
+├── README.md                      # Overview and quickstart documentation
+├── assets/
+│   ├── css/                       # Design token system and stylesheets
+│   └── js/                        # Studio administrative modules
+├── chatbot/
+│   ├── loader.js                  # Asynchronous website embedding loader
+│   ├── runtime.js                 # Conversation processing engine
+│   ├── renderer.js                # Isolated Shadow DOM widget renderer
+│   ├── knowledge-engine.js        # Deterministic FAQ matching engine
+│   ├── workflow-engine.js         # Branching logic &amp; variable capture
+│   ├── conversation.js            # State, history, and business hours
+│   └── adapters/                  # Multi-channel protocol adapters
+├── data/
+│   ├── schemas/                   # JSON Schema definitions
+│   └── templates/                 # 8 industry-specific bot templates
+├── integrations/serverless/       # Telegram, WhatsApp &amp; HTTP bridge
+├── docs/                          # Developer &amp; User guides
+└── tests/                         # Node &amp; browser automated test suites</code></pre></div>
+<h2>6. Application Installation</h2>
+<p>No <code>npm install</code> is required. The application executes immediately on any static HTTP file server.</p>
+<h2>7. Local Development</h2>
+<p>Start any basic static file server from the root directory:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>python3 -m http.server 3000
+# or
+npx serve . -l 3000</code></pre></div>
+<p>Open <code>http://localhost:3000</code> in any modern web browser.</p>
+<h2>8. Running Without Build Tools</h2>
+<p>Browsers natively fetch and execute ES Modules declared with <code>&lt;script type=&quot;module&quot;&gt;</code>. All imports utilize standard relative URL paths (<code>./assets/js/app.js</code>).</p>
+<h2>9. JavaScript Module Architecture</h2>
+<li><code>storage.js</code>: Provides an asynchronous CRUD interface wrapping IndexedDB with automatic localStorage failover.</li>
+<li><code>validation.js</code>: Schema rules validator ensuring structural integrity without third-party schema dependencies.</li>
+<li><code>config-manager.js</code>: Handles template instantiation, deep cloning, and CSV conversion.</li>
+<li><code>state.js</code>: Lightweight EventEmitter managing application state.</li>
+<li><code>router.js</code>: Window hash change listener enabling client-side SPA routing.</li>
+<h2>10. Chatbot Configuration Schema</h2>
+<p>Every chatbot is represented by a strictly typed JSON object adhering to <code>data/schemas/chatbot-schema.json</code>. Essential top-level sections include:</p>
+<li><code>identity</code>: Assistant name, company name, tone, personality, greetings, and fallbacks.</li>
+<li><code>appearance</code>: Colors, position, themes, custom CSS, launcher configuration.</li>
+<li><code>welcomeExperience</code>: Greeting text, starter questions, consent warnings.</li>
+<li><code>knowledgeBase</code>: Array of FAQ items with questions, answers, and keywords.</li>
+<li><code>conversationFlows</code>: State machine definitions for multi-step dialogs.</li>
+<li><code>businessRules</code>: Timezones, weekly schedules, after-hours messaging, confidence thresholds.</li>
+<li><code>humanHandoff</code>: Auto-escalation thresholds, notification email, and support URLs.</li>
+<li><code>integrations</code>: Platform-specific options and security parameters.</li>
+<li><code>privacy</code>: Session persistence mode, retention limits, PII controls.</li>
+<h2>11. Configuration Validation</h2>
+<p><code>ConfigValidator.validate(config)</code> parses configurations recursively and validates:</p>
+<li>Hexadecimal color codes (<code>^#[0-9a-fA-F]{6}$</code>).</li>
+<li>Machine identifiers (<code>^[a-z0-9_-]{3,64}$</code>).</li>
+<li>Presence of required fields and types.</li>
+<li>Broken step references in conversation flows.</li>
+<h2>12. Configuration Storage</h2>
+<li><code>StorageManager.getAllChatbots()</code> queries the IndexedDB <code>chatbots</code> store, falling back to <code>localStorage.getItem(&#x27;chatbot_creator_bots&#x27;)</code>.</li>
+<li>Configurations can be exported and imported as portable <code>.json</code> files.</li>
+<h2>13. Runtime Engine Internals</h2>
+<p><code>ChatbotRuntime</code> acts as the single source of truth for message evaluation:</p>
+<li>Validates input text.</li>
+<li>Checks human escalation keywords.</li>
+<li>Advances running conversation flows if active.</li>
+<li>Checks triggers for new conversational workflows.</li>
+<li>Performs deterministic knowledge-base search.</li>
+<li>Evaluates fallback thresholds and triggers handoff when threshold exceeded.</li>
+<h2>14. Knowledge-Base Matching Algorithm</h2>
+<p><code>KnowledgeEngine.findBestMatch(query, kb, threshold)</code> performs a 4-stage deterministic evaluation:</p>
+<li><strong>Exact Match</strong>: Direct equality check yielding 1.0 confidence.</li>
+<li><strong>Alternative Phrasings</strong>: Levenshtein distance check yielding up to 1.0 confidence.</li>
+<li><strong>Keyword Overlap</strong>: Weighted keyword scoring checking word presence.</li>
+<li><strong>Tokenization &amp; Stop Words</strong>: Strips common stop-words and computes intersection ratios.</li>
+<h2>15. Conversation-State Management</h2>
+<p><code>ConversationState</code> maintains session identity, FIFO message history capped at <code>maxHistoryItems</code>, captured variables, and business hours status.</p>
+<h2>16. Workflow Engine</h2>
+<p><code>WorkflowEngine</code> evaluates step nodes (<code>question</code>, <code>input_capture</code>, <code>quick_replies</code>, <code>message</code>, <code>handoff</code>, <code>end</code>). Input validation supports email, phone, text, and numeric validation.</p>
+<h2>17. Widget-Rendering Architecture</h2>
+<p>The widget renders inside a Shadow Root via <code>this.hostElement.attachShadow({ mode: &#x27;open&#x27; })</code>. Host website CSS styles do not leak into the widget, and widget styles do not affect the host page.</p>
+<h2>18. Website Embedding Architecture</h2>
+<p>A non-blocking asynchronous loader script (<code>chatbot/loader.js</code>) dynamically downloads and launches the self-contained widget bundle (<code>chatbot/chatbot.bundle.js</code>). The widget engine is 100% dependency-free, avoiding cross-origin module loading issues when embedded on external customer domains, CMS platforms (WordPress, Shopify, Webflow), or static sites.</p>
+<h3>Multi-Tier Configuration Discovery Engine</h3>
+<p>The embed loader implements a resilient 5-tier configuration discovery hierarchy to guarantee that a chatbot displays cleanly across any external environment:</p>
+<li><strong>Inlined JSON Data Attribute (<code>data-chatbot-data</code> or <code>data-config</code>):</strong> Provides instant, zero-database embedding. The complete bot configuration is encoded directly in the script tag, ensuring instant rendering on any third-party domain without requiring server-side API setups.</li>
+<li><strong>Hosted Remote Configuration URL (<code>data-config-url</code>):</strong> Directly fetches the published JSON configuration from any CORS-enabled CDN, S3 bucket, or static server.</li>
+<li><strong>Same-Origin LocalStorage:</strong> When embedded on the same origin as the Studio, attempts to discover the draft or published bot configuration in <code>localStorage</code>.</li>
+<li><strong>Serverless API Bridge (<code>/api/chatbots/:id</code>):</strong> When connected to the serverless bridge, queries the API backend for dynamic database-backed chatbot instances.</li>
+<li><strong>Static Template / Fallback Configuration:</strong> Falls back to relative static template paths (<code>/data/templates/:id.json</code>) or a resilient default assistant configuration, preventing empty containers or broken widgets if an ID is missing.</li>
+<h3>Educational Showcase &amp; Live Telemetry Mini-App (`demo/index.html`)</h3>
+<p>The platform includes an isolated educational mini-app located in <code>demo/index.html</code> (with <code>demo/demo.js</code> and <code>demo/demo.css</code>). It simulates a live external customer storefront (&quot;Nova Commerce &amp; Support Portal&quot;) and features:</p>
+<li>Interactive User Experience Tour demonstrating starters, FAQs, workflows, and handoffs.</li>
+<li>Live Runtime Event Telemetry console reporting real-time knowledge matching scores, captured variables, and flow transitions.</li>
+<li>Dynamic assistant switcher allowing users to test any studio-saved chatbot, template, or custom uploaded JSON configuration.</li>
+<h2>19. Integration Adapter Architecture</h2>
+<p>All channel adapters inherit from <code>AdapterInterface</code>:</p>
+<li><code>connect()</code></li>
+<li><code>disconnect()</code></li>
+<li><code>validateConfiguration()</code></li>
+<li><code>normalizeIncomingMessage(rawEvent)</code></li>
+<li><code>sendMessage(recipientId, text, options)</code></li>
+<li><code>verifyWebhook(headers, rawBody)</code></li>
+<h2>20. Creating a New Messaging Platform Adapter</h2>
+<p>To create a new adapter (e.g., Slack or Discord):</p>
+<li>Subclass <code>AdapterInterface</code>.</li>
+<li>Implement message normalization to transform vendor event schemas into standard <code>{ senderId, text, metadata }</code> objects.</li>
+<li>Implement <code>sendMessage()</code> to dispatch outbound payloads.</li>
+<h2>21. WhatsApp Integration Architecture</h2>
+<p>Connects to Meta WhatsApp Cloud API via serverless handler <code>integrations/serverless/whatsapp-webhook.js</code>. Inbound webhook challenges (<code>hub.challenge</code>) and incoming messages are normalized, processed through <code>ChatbotRuntime</code>, and dispatched via Graph API.</p>
+<h2>22. Telegram Integration Architecture</h2>
+<p>Uses <code>integrations/serverless/telegram-webhook.js</code>. Inbound webhook calls are authenticated using the <code>X-Telegram-Bot-Api-Secret-Token</code> header. Outbound messages are formatted with inline keyboard buttons.</p>
+<h2>23. Webhook Implementation</h2>
+<p><code>GenericWebhookAdapter</code> dispatches standard HTTP POST events to external endpoints whenever conversations start, messages are sent, or human escalation occurs.</p>
+<h2>24. Secret Management</h2>
+<p>Client-side code never stores Telegram Bot Tokens or WhatsApp System User Tokens. All privileged credentials must be provided as environment variables to the serverless bridge layer:</p>
+<li><code>TELEGRAM_BOT_TOKEN</code></li>
+<li><code>TELEGRAM_SECRET_TOKEN</code></li>
+<li><code>WHATSAPP_ACCESS_TOKEN</code></li>
+<li><code>WHATSAPP_VERIFY_TOKEN</code></li>
+<h2>25. Optional Serverless Functionality</h2>
+<p><code>integrations/serverless/api/bridge-server.js</code> provides a standalone Node.js HTTP server for local testing and serverless deployment.</p>
+<h2>26. API Contracts</h2>
+<p>All adapters and runtime operations return predictable response structures:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>{
+  type: &#x27;faq_answer&#x27; | &#x27;flow_step&#x27; | &#x27;fallback&#x27; | &#x27;handoff&#x27;,
+  message: { sender: &#x27;bot&#x27;, text: &#x27;...&#x27;, timestamp: &#x27;...&#x27; },
+  options: []
+}</code></pre></div>
+<h2>27. Error Handling</h2>
+<p>All operations implement defensive fallbacks. Network disconnections in the widget display non-blocking error notices, and database corruption falls back to localStorage.</p>
+<h2>28. Security Architecture</h2>
+<li>HTML output is sanitized via <code>ConfigValidator.escapeHtml</code>.</li>
+<li>Dynamic code evaluation (<code>eval</code>, <code>Function</code>) is strictly forbidden.</li>
+<li>Scoped Shadow DOM prevents style pollution.</li>
+<li>Webhook secret token verification blocks spoofed requests.</li>
+<h2>29. Privacy and Data Management</h2>
+<li>No third-party analytics or tracker beacons.</li>
+<li>Chat session retention limits are enforced.</li>
+<li>Workspaces and sessions remain isolated.</li>
+<h2>30. Testing Procedures</h2>
+<p>Run automated Node.js test suites:</p>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>node tests/run-all.js</code></pre></div>
+<p>Or open <code>tests/index.html</code> in any browser to execute client-side assertions.</p>
+<h2>31. Deployment</h2>
+<p>Deploy static assets to GitHub Pages, Cloudflare Pages, Netlify, or AWS S3. Deploy the serverless bridge to AWS Lambda, Vercel Functions, or Cloudflare Workers.</p>
+<h2>32. Version Management</h2>
+<p>Every published configuration increments the <code>version</code> integer, preserving previous schema stability.</p>
+<h2>33. Debugging</h2>
+<p>Inspect <code>window.__STUDIO_APP__</code> in the browser console for live state and configuration objects.</p>
+<h2>34. Performance Optimization</h2>
+<p>Widget payload is under 35KB uncompressed, loads asynchronously, and generates zero blocking render delays.</p>
+<h2>35. Troubleshooting</h2>
+<p>See <code>docs/TROUBLESHOOTING.md</code> for specific issue diagnosis.</p>
+<h2>36. Contribution Guidelines</h2>
+<li>Preserve zero-framework architecture.</li>
+<li>Do not introduce npm runtime dependencies.</li>
+<li>Ensure all tests in <code>tests/run-all.js</code> pass before submitting.</li>
+<h2>37. Future Extension Opportunities</h2>
+<li>Vector search via browser WebAssembly embeddings.</li>
+<li>Voice input using native Web Speech API.</li>
+<li>Live WebRTC agent audio handoff.</li>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    // Copy code button script
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.nextElementSibling;
+        const text = pre ? pre.innerText : '';
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          btn.classList.add('copied');
+          btn.innerText = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = 'Copy';
+          }, 2000);
+        } catch(e) {
+          console.error(e);
+        }
+      });
+    });
+
+    // Highlight active sidebar link
+    document.querySelectorAll('.docs-nav-link').forEach(link => {
+      if (link.getAttribute('href') === 'developer-guide.html') {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot Creator Studio | Zero-Framework Customizable Micro-SaaS Platform</title>
+  <meta name="description" content="Build, customize, and deploy intelligent customer support chatbots in minutes with zero frameworks, zero dependencies, and 100% vanilla JavaScript.">
+  <meta name="keywords" content="chatbot creator, zero-framework chatbot, customer support bot, micro-saas, embeddable chat widget, no-code bot builder, vanilla javascript chatbot">
+  <meta name="author" content="Chatbot Creator Studio">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="canonical" href="./">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chatbot Creator Studio | Zero-Framework Micro-SaaS">
+  <meta property="og:description" content="Create, customize, test, and publish intelligent customer-support chatbots with zero build steps and complete style isolation.">
+  <meta property="og:image" content="favicon.svg">
+  <meta property="og:site_name" content="Chatbot Creator Studio">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chatbot Creator Studio | Zero-Framework Micro-SaaS">
+  <meta name="twitter:description" content="Build and deploy lightweight customizable chatbots with zero frameworks and native web standards.">
+  <meta name="twitter:image" content="favicon.svg">
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Chatbot Creator Studio",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All modern browsers",
+    "description": "Zero-framework customizable customer-support chatbot creation and management studio.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="stylesheet" href="assets/css/builder.css">
+  <link rel="stylesheet" href="assets/css/widget.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">C</div>
+        <div class="brand-text">
+          <h1>Chatbot Studio</h1>
+          <span>Micro-SaaS Platform</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <a href="#/" class="nav-item active">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Overview
+        </a>
+        <a href="#/chatbots" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+          My Chatbots
+        </a>
+        <a href="#/create" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Create New
+        </a>
+        <a href="#/integrations" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+          Integrations
+        </a>
+        <a href="#/analytics" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Analytics
+        </a>
+        <a href="#/docs" class="nav-item">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Documentation
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div>Zero-Framework v1.0.0</div>
+        <div style="font-size: 11px; color: var(--slate-400); margin-top: 2px;">Local Standalone Studio</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-bar">
+        <h2 class="page-title" id="pageTitle">Platform Overview</h2>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <!-- Backend Mode Switcher -->
+          <div class="backend-switcher" style="display: flex; align-items: center; gap: 8px; background: var(--bg-surface); padding: 4px 10px; border-radius: var(--radius-full); border: 1px solid var(--border-color); font-size: 0.8125rem;">
+            <span style="color: var(--text-muted);">Storage:</span>
+            <button id="backendToggleBtn" class="btn btn-sm btn-outline" style="border-radius: var(--radius-full); padding: 2px 10px; font-size: 0.75rem; font-weight: 600;">
+              <span id="backendModeLabel">🖥️ Local Offline</span>
+            </button>
+          </div>
+
+          <div id="userAccountSection" style="display: none; align-items: center; gap: 8px;">
+            <span id="userPlanBadge" class="badge" style="background: rgba(37,99,235,0.1); color: var(--color-primary); font-weight: 600;">Free Starter</span>
+            <button id="membershipBtn" class="btn btn-sm btn-primary" style="padding: 4px 10px; font-size: 0.75rem;">Upgrade</button>
+            <button id="logoutBtn" class="btn btn-sm btn-ghost" title="Logout" style="padding: 4px 8px; font-size: 0.75rem;">Sign out</button>
+          </div>
+
+          <span class="badge badge-published" style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: currentColor;"></span>
+            Zero Dependencies
+          </span>
+        </div>
+      </header>
+
+      <div class="content-body" id="appContent">
+        <!-- Views dynamically injected here -->
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Backend Auth Modal -->
+  <div id="authModal" class="modal" style="display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(15,23,42,0.6); align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+    <div class="modal-card card" style="max-width: 440px; width: 90%; background: var(--bg-surface); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 id="authModalTitle" style="font-size: 1.25rem; font-weight: 700;">Connect to PHP Cloud SaaS</h3>
+        <button id="closeAuthModalBtn" class="btn btn-ghost" style="padding: 4px 8px; font-size: 1.25rem;">&times;</button>
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+        <button id="authTabLogin" class="btn btn-sm btn-outline active" style="flex: 1;">Sign In</button>
+        <button id="authTabRegister" class="btn btn-sm btn-outline" style="flex: 1;">Create Account</button>
+      </div>
+
+      <form id="authForm" style="display: flex; flex-direction: column; gap: 14px;">
+        <div id="authNameGroup" style="display: none;">
+          <label style="display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Full Name</label>
+          <input type="text" id="authName" class="form-control" placeholder="Jane Doe" style="width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Email Address</label>
+          <input type="email" id="authEmail" class="form-control" placeholder="user@example.com" required style="width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+        </div>
+
+        <div>
+          <label style="display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 4px;">Password</label>
+          <input type="password" id="authPassword" class="form-control" placeholder="••••••••" required style="width: 100%; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
+        </div>
+
+        <div id="authErrorMsg" style="color: var(--color-danger); font-size: 0.8125rem; display: none;"></div>
+
+        <button type="submit" id="authSubmitBtn" class="btn btn-primary" style="width: 100%; padding: 10px; margin-top: 8px; font-weight: 600;">Sign In to Cloud Studio</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SaaS Membership Pricing Modal -->
+  <div id="membershipModal" class="modal" style="display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(15,23,42,0.6); align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+    <div class="modal-card card" style="max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto; background: var(--bg-surface); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div>
+          <h3 style="font-size: 1.5rem; font-weight: 800;">Choose Your Studio Plan</h3>
+          <p style="color: var(--text-muted); font-size: 0.875rem;">Scale your conversational assistants with transparent tiered pricing.</p>
+        </div>
+        <button id="closeMembershipModalBtn" class="btn btn-ghost" style="padding: 4px 8px; font-size: 1.5rem;">&times;</button>
+      </div>
+
+      <!-- Billing Cycle Toggle -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin: 24px 0;">
+        <span style="font-weight: 600; font-size: 0.875rem;">Monthly</span>
+        <button id="billingCycleToggleBtn" class="btn btn-sm btn-outline" style="border-radius: var(--radius-full); padding: 4px 14px; font-size: 0.75rem;">
+          <span id="billingCycleText">Switch to Yearly</span>
+        </button>
+        <span style="font-weight: 600; font-size: 0.875rem;">Yearly <span class="badge" style="background: rgba(16,185,129,0.15); color: #059669; font-size: 0.75rem; margin-left: 4px;">Save 20%</span></span>
+      </div>
+
+      <!-- Plan Cards Grid -->
+      <div id="plansGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <div style="border-top: 1px solid var(--border-color); padding-top: 16px; text-align: center; font-size: 0.8125rem; color: var(--text-muted);">
+        🔒 Secure multi-choice recurring and ongoing payments processed via PayPal. Cancel anytime.
+      </div>
+    </div>
+  </div>
+
+  <!-- Native ES Module Application Entrypoint -->
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

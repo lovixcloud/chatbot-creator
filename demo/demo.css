@@ -1,0 +1,248 @@
+/* Isolated Educational Demo App Styles */
+:root {
+  --demo-primary: #2563eb;
+  --demo-bg: #f8fafc;
+  --demo-surface: #ffffff;
+  --demo-border: #e2e8f0;
+  --demo-text: #0f172a;
+  --demo-text-muted: #64748b;
+  --demo-accent: #10b981;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--demo-bg);
+  color: var(--demo-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Demo Top Bar */
+.demo-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--demo-border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.demo-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.demo-badge {
+  background: #eff6ff;
+  color: var(--demo-primary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  border: 1px solid #bfdbfe;
+}
+
+.demo-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.demo-select {
+  padding: 8px 12px;
+  border: 1px solid var(--demo-border);
+  border-radius: 6px;
+  font-size: 13.5px;
+  background: #ffffff;
+  color: var(--demo-text);
+  outline: none;
+}
+
+.demo-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--demo-border);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--demo-text);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo-btn:hover {
+  background: #f1f5f9;
+}
+
+.demo-btn-primary {
+  background: var(--demo-primary);
+  color: #ffffff;
+  border-color: var(--demo-primary);
+}
+
+.demo-btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* Two-column layout: Mock host website + Live educational documentation & event console */
+.demo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+  flex: 1;
+  min-height: 0;
+}
+
+.mock-website {
+  padding: 40px;
+  overflow-y: auto;
+  background: #ffffff;
+  border-right: 1px solid var(--demo-border);
+}
+
+.mock-hero {
+  max-width: 680px;
+  margin-bottom: 36px;
+}
+
+.mock-hero h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.mock-hero p {
+  font-size: 16px;
+  color: var(--demo-text-muted);
+  line-height: 1.6;
+}
+
+.mock-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.mock-card {
+  padding: 20px;
+  border: 1px solid var(--demo-border);
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.mock-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.mock-card p {
+  font-size: 13px;
+  color: var(--demo-text-muted);
+}
+
+/* Educational Sidebar */
+.educational-sidebar {
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-left: 1px solid var(--demo-border);
+}
+
+.edu-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--demo-border);
+}
+
+.edu-section h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edu-tip {
+  background: #ffffff;
+  border: 1px solid var(--demo-border);
+  border-left: 4px solid var(--demo-primary);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Real-Time Event Log */
+.event-log-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+}
+
+.log-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid #1e293b;
+  padding-bottom: 6px;
+}
+
+.log-time {
+  color: #64748b;
+  font-size: 10px;
+}
+
+.log-event {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.log-detail {
+  color: #94a3b8;
+  word-break: break-word;
+}
+
+@media (max-width: 960px) {
+  .demo-layout {
+    grid-template-columns: 1fr;
+  }
+  .mock-website {
+    border-right: none;
+    border-bottom: 1px solid var(--demo-border);
+    padding: 24px;
+  }
+}

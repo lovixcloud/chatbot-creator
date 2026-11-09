@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuration Schema Reference | Zero-Framework Chatbot Documentation</title>
+  <meta name="description" content="Full JSON configuration fields, types, default values, and structure.">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <a href="../index.html" class="docs-brand">
+        <div class="brand-icon">C</div>
+        <div>
+          <strong style="display:block; font-size: 14px;">Chatbot Studio</strong>
+          <span style="font-size: 11px; color: var(--slate-500);">Documentation Center</span>
+        </div>
+      </a>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Guides &amp; References</div>
+        <ul class="docs-nav-list">
+          <li><a href="index.html" class="docs-nav-link">Documentation Home</a></li>
+          <li><a href="developer-guide.html" class="docs-nav-link">Developer Technical Guide</a></li>
+<li><a href="chatbot-owner-guide.html" class="docs-nav-link">Chatbot Owner Handbook</a></li>
+<li><a href="installation-guide.html" class="docs-nav-link">Website Installation & CMS Guide</a></li>
+<li><a href="integration-guide.html" class="docs-nav-link">Multi-Channel Integration Guide</a></li>
+<li><a href="configuration-reference.html" class="docs-nav-link">Configuration Schema Reference</a></li>
+<li><a href="api-reference.html" class="docs-nav-link">JavaScript API Reference</a></li>
+<li><a href="security-and-privacy.html" class="docs-nav-link">Security, CSP & Privacy Guide</a></li>
+<li><a href="troubleshooting.html" class="docs-nav-link">Troubleshooting & Diagnostics</a></li>
+        </ul>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color);">
+        <a href="../index.html" class="btn-back">← Back to Studio</a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-main">
+      <div class="docs-topbar">
+        <div style="font-size: 13px; color: var(--slate-500);">
+          <a href="index.html" style="color: inherit; text-decoration: none;">Docs</a> &gt; <span>Configuration Schema Reference</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="CONFIGURATION-REFERENCE.md" class="btn-github-md" target="_blank" title="View raw Markdown file for developers">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            View .MD
+          </a>
+          <a href="../index.html" class="btn-back">Studio</a>
+        </div>
+      </div>
+
+      <article class="docs-content">
+        <h1>Chatbot Configuration Schema Reference</h1>
+<p>Every chatbot configuration is stored as a validated JSON document complying with <code>data/schemas/chatbot-schema.json</code>.</p>
+<hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
+<h2>Complete JSON Schema Example</h2>
+<div class="code-wrapper"><button class="copy-btn">Copy</button><pre><code>{
+  &quot;schemaVersion&quot;: &quot;1.0.0&quot;,
+  &quot;id&quot;: &quot;bot_support_01&quot;,
+  &quot;name&quot;: &quot;Nova Support Pro&quot;,
+  &quot;description&quot;: &quot;Customer service assistant&quot;,
+  &quot;status&quot;: &quot;published&quot;,
+  &quot;version&quot;: 1,
+  &quot;createdAt&quot;: &quot;2025-01-01T00:00:00.000Z&quot;,
+  &quot;updatedAt&quot;: &quot;2025-01-01T00:00:00.000Z&quot;,
+  &quot;identity&quot;: {
+    &quot;assistantName&quot;: &quot;Nova Assistant&quot;,
+    &quot;businessName&quot;: &quot;Acme Corp&quot;,
+    &quot;businessCategory&quot;: &quot;Customer Support&quot;,
+    &quot;role&quot;: &quot;Support Agent&quot;,
+    &quot;personality&quot;: &quot;professional&quot;,
+    &quot;tone&quot;: &quot;empathetic&quot;,
+    &quot;avatarUrl&quot;: &quot;&quot;,
+    &quot;businessLogoUrl&quot;: &quot;&quot;,
+    &quot;fallbackMessage&quot;: &quot;I don&#x27;t have that answer right now.&quot;,
+    &quot;errorMessage&quot;: &quot;A temporary error occurred.&quot;,
+    &quot;handoffMessage&quot;: &quot;Connecting to an agent.&quot;,
+    &quot;endingMessage&quot;: &quot;Thank you for chatting!&quot;
+  },
+  &quot;appearance&quot;: {
+    &quot;theme&quot;: &quot;light&quot;,
+    &quot;position&quot;: &quot;bottom-right&quot;,
+    &quot;primaryColor&quot;: &quot;#2563eb&quot;,
+    &quot;secondaryColor&quot;: &quot;#1d4ed8&quot;,
+    &quot;backgroundColor&quot;: &quot;#ffffff&quot;,
+    &quot;textColor&quot;: &quot;#1e293b&quot;,
+    &quot;userBubbleColor&quot;: &quot;#2563eb&quot;,
+    &quot;botBubbleColor&quot;: &quot;#f1f5f9&quot;,
+    &quot;borderRadius&quot;: 16,
+    &quot;fontFamily&quot;: &quot;system-ui, sans-serif&quot;,
+    &quot;headerTitle&quot;: &quot;Nova Support Pro&quot;,
+    &quot;headerSubtitle&quot;: &quot;Typically replies instantly&quot;,
+    &quot;launcherIcon&quot;: &quot;chat&quot;,
+    &quot;launcherText&quot;: &quot;Chat with us&quot;,
+    &quot;customCss&quot;: &quot;&quot;,
+    &quot;width&quot;: 380,
+    &quot;height&quot;: 580
+  },
+  &quot;welcomeExperience&quot;: {
+    &quot;greeting&quot;: &quot;Hello! How can we assist you today?&quot;,
+    &quot;showWelcomeScreen&quot;: true,
+    &quot;welcomeTitle&quot;: &quot;Welcome&quot;,
+    &quot;welcomeSubtitle&quot;: &quot;Ask a question&quot;,
+    &quot;conversationStarters&quot;: [&quot;What are your hours?&quot;, &quot;Return policy&quot;],
+    &quot;askUserName&quot;: false,
+    &quot;askUserEmail&quot;: false,
+    &quot;consentMessage&quot;: &quot;By chatting, you agree to our privacy policy.&quot;
+  },
+  &quot;knowledgeBase&quot;: [
+    {
+      &quot;id&quot;: &quot;faq_hours&quot;,
+      &quot;question&quot;: &quot;What are your hours?&quot;,
+      &quot;answer&quot;: &quot;We are open Monday through Friday, 9am to 6pm.&quot;,
+      &quot;category&quot;: &quot;General&quot;,
+      &quot;keywords&quot;: [&quot;hours&quot;, &quot;open&quot;, &quot;timing&quot;],
+      &quot;alternativePhrasings&quot;: [&quot;When are you open?&quot;],
+      &quot;priority&quot;: 5
+    }
+  ],
+  &quot;conversationFlows&quot;: [],
+  &quot;businessRules&quot;: {
+    &quot;timezone&quot;: &quot;UTC&quot;,
+    &quot;operatingHours&quot;: {
+      &quot;enabled&quot;: false,
+      &quot;schedule&quot;: {},
+      &quot;afterHoursMessage&quot;: &quot;We are closed.&quot;
+    },
+    &quot;confidenceThreshold&quot;: 0.35,
+    &quot;maxHistoryItems&quot;: 30,
+    &quot;rateLimitPerMinute&quot;: 20
+  },
+  &quot;humanHandoff&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;mode&quot;: &quot;email&quot;,
+    &quot;destinationEmail&quot;: &quot;support@example.com&quot;,
+    &quot;supportUrl&quot;: &quot;https://example.com/support&quot;,
+    &quot;autoEscalateKeywords&quot;: [&quot;agent&quot;, &quot;human&quot;, &quot;representative&quot;],
+    &quot;consecutiveFallbacksBeforeHandoff&quot;: 2
+  },
+  &quot;integrations&quot;: {
+    &quot;website&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;allowedDomains&quot;: [&quot;*&quot;],
+      &quot;requireDomainValidation&quot;: false
+    },
+    &quot;telegram&quot;: {
+      &quot;enabled&quot;: false,
+      &quot;botUsername&quot;: &quot;&quot;,
+      &quot;bridgeEndpoint&quot;: &quot;&quot;,
+      &quot;status&quot;: &quot;unconfigured&quot;
+    },
+    &quot;whatsapp&quot;: {
+      &quot;enabled&quot;: false,
+      &quot;phoneNumberId&quot;: &quot;&quot;,
+      &quot;businessAccountId&quot;: &quot;&quot;,
+      &quot;bridgeEndpoint&quot;: &quot;&quot;,
+      &quot;status&quot;: &quot;unconfigured&quot;
+    },
+    &quot;webhook&quot;: {
+      &quot;enabled&quot;: false,
+      &quot;endpointUrl&quot;: &quot;&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;events&quot;: [&quot;on_message&quot;, &quot;on_handoff&quot;],
+      &quot;customHeaders&quot;: {}
+    }
+  },
+  &quot;privacy&quot;: {
+    &quot;sessionPersistence&quot;: &quot;session&quot;,
+    &quot;retentionDays&quot;: 30,
+    &quot;collectAnalytics&quot;: true,
+    &quot;maskPii&quot;: false,
+    &quot;privacyPolicyUrl&quot;: &quot;https://example.com/privacy&quot;
+  }
+}</code></pre></div>
+<hr style="margin: 24px 0; border: none; border-top: 1px solid var(--border-color);">
+<h2>3. Embedding and Deployment Formats</h2>
+<h3>Inlined Configuration Attribute (`data-chatbot-data`)</h3>
+<p>For universal third-party website embedding with zero database setup:</p>
+<li>Encodes the full configuration object using <code>encodeURIComponent(JSON.stringify(config))</code> or <code>base64:BASE64_DATA</code>.</li>
+<li>Passed directly on the <code>&lt;script&gt;</code> tag alongside <code>data-chatbot-id</code>.</li>
+<h3>Dynamic Remote URL (`data-config-url`)</h3>
+<p>For hosting configurations on static object storage, GitHub Pages, or serverless APIs:</p>
+<li>Points directly to a hosted JSON endpoint (e.g. <code>https://my-cdn.com/chatbots/my-bot.json</code>).</li>
+      </article>
+    </main>
+  </div>
+
+  <script>
+    // Copy code button script
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.nextElementSibling;
+        const text = pre ? pre.innerText : '';
+        try {
+          if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          btn.classList.add('copied');
+          btn.innerText = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerText = 'Copy';
+          }, 2000);
+        } catch(e) {
+          console.error(e);
+        }
+      });
+    });
+
+    // Highlight active sidebar link
+    document.querySelectorAll('.docs-nav-link').forEach(link => {
+      if (link.getAttribute('href') === 'configuration-reference.html') {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

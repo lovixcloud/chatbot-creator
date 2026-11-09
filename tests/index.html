@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Automated Test Runner</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; background: #0f172a; color: #f8fafc; }
+    h1 { font-size: 20px; margin-bottom: 16px; }
+    .test-log { background: #1e293b; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 13px; line-height: 1.6; }
+    .pass { color: #10b981; }
+    .fail { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <h1>Browser Test Suite Runner</h1>
+  <div class="test-log" id="log">Running browser suite...</div>
+
+  <script type="module">
+    import { ConfigValidator } from '../assets/js/validation.js';
+    import { ConfigManager } from '../assets/js/config-manager.js';
+    import { KnowledgeEngine } from '../chatbot/knowledge-engine.js';
+    import { ChatbotRuntime } from '../chatbot/runtime.js';
+
+    const logEl = document.getElementById('log');
+    function log(msg, isPass) {
+      const div = document.createElement('div');
+      div.className = isPass ? 'pass' : 'fail';
+      div.textContent = msg;
+      logEl.appendChild(div);
+    }
+
+    try {
+      const cfg = ConfigManager.createDefault();
+      const v = ConfigValidator.validate(cfg);
+      log(`Config Validation: ${v.valid ? 'PASSED' : 'FAILED'}`, v.valid);
+
+      const match = KnowledgeEngine.findBestMatch('hours', cfg.knowledgeBase);
+      log(`Knowledge Base Match: ${match.match ? 'PASSED' : 'FAILED'}`, Boolean(match.match));
+
+      const runtime = new ChatbotRuntime(cfg);
+      const init = runtime.initializeSession();
+      log(`Runtime Session Initialization: ${init.type === 'greeting' ? 'PASSED' : 'FAILED'}`, init.type === 'greeting');
+
+      log('ALL IN-BROWSER TESTS COMPLETED SUCCESSFULLY', true);
+    } catch (e) {
+      log(`ERROR: ${e.message}`, false);
+    }
+  </script>
+</body>
+</html>

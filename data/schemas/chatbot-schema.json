@@ -1,0 +1,324 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chatbot-creator.app/schemas/chatbot-schema.json",
+  "title": "ChatbotConfiguration",
+  "description": "Standard configuration schema for zero-framework customizable chatbots",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "status",
+    "identity",
+    "appearance",
+    "welcomeExperience",
+    "knowledgeBase",
+    "conversationFlows",
+    "businessRules",
+    "integrations",
+    "privacy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["1.0.0"]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]{3,64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "archived"]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "identity": {
+      "type": "object",
+      "required": ["assistantName", "businessName", "role", "personality"],
+      "properties": {
+        "assistantName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "businessName": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "businessCategory": { "type": "string" },
+        "role": { "type": "string" },
+        "personality": {
+          "type": "string",
+          "enum": ["friendly", "professional", "conversational", "technical", "casual"]
+        },
+        "tone": {
+          "type": "string",
+          "enum": ["formal", "informal", "empathetic", "concise"]
+        },
+        "avatarUrl": { "type": "string" },
+        "businessLogoUrl": { "type": "string" },
+        "fallbackMessage": { "type": "string" },
+        "errorMessage": { "type": "string" },
+        "handoffMessage": { "type": "string" },
+        "endingMessage": { "type": "string" }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "required": ["primaryColor", "position", "theme"],
+      "properties": {
+        "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+        "position": {
+          "type": "string",
+          "enum": ["bottom-right", "bottom-left", "bottom-center"]
+        },
+        "primaryColor": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "secondaryColor": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+        "backgroundColor": { "type": "string" },
+        "textColor": { "type": "string" },
+        "userBubbleColor": { "type": "string" },
+        "botBubbleColor": { "type": "string" },
+        "borderRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "fontFamily": { "type": "string" },
+        "headerTitle": { "type": "string" },
+        "headerSubtitle": { "type": "string" },
+        "launcherIcon": { "type": "string", "enum": ["chat", "robot", "headset", "sparkle"] },
+        "launcherText": { "type": "string" },
+        "customCss": { "type": "string" },
+        "width": { "type": "integer", "minimum": 280, "maximum": 600 },
+        "height": { "type": "integer", "minimum": 400, "maximum": 800 }
+      }
+    },
+    "welcomeExperience": {
+      "type": "object",
+      "required": ["greeting", "conversationStarters"],
+      "properties": {
+        "greeting": { "type": "string", "minLength": 1 },
+        "showWelcomeScreen": { "type": "boolean" },
+        "welcomeTitle": { "type": "string" },
+        "welcomeSubtitle": { "type": "string" },
+        "conversationStarters": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "askUserName": { "type": "boolean" },
+        "askUserEmail": { "type": "boolean" },
+        "consentMessage": { "type": "string" }
+      }
+    },
+    "knowledgeBase": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "answer", "keywords"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string", "minLength": 1 },
+          "answer": { "type": "string", "minLength": 1 },
+          "category": { "type": "string" },
+          "keywords": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "alternativePhrasings": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "priority": { "type": "integer", "minimum": 1, "maximum": 10 }
+        }
+      }
+    },
+    "conversationFlows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "trigger", "steps"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "trigger": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": { "type": "string", "enum": ["button", "keyword", "auto", "event"] },
+              "value": { "type": "string" }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "type"],
+              "properties": {
+                "id": { "type": "string" },
+                "type": {
+                  "type": "string",
+                  "enum": ["message", "question", "quick_replies", "input_capture", "handoff", "end"]
+                },
+                "text": { "type": "string" },
+                "inputType": {
+                  "type": "string",
+                  "enum": ["text", "email", "phone", "number", "date"]
+                },
+                "variableName": { "type": "string" },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["label", "nextStepId"],
+                    "properties": {
+                      "label": { "type": "string" },
+                      "value": { "type": "string" },
+                      "nextStepId": { "type": "string" }
+                    }
+                  }
+                },
+                "nextStepId": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "businessRules": {
+      "type": "object",
+      "properties": {
+        "timezone": { "type": "string" },
+        "operatingHours": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "schedule": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "open": { "type": "string" },
+                  "close": { "type": "string" },
+                  "closed": { "type": "boolean" }
+                }
+              }
+            },
+            "afterHoursMessage": { "type": "string" }
+          }
+        },
+        "confidenceThreshold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "maxHistoryItems": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 100
+        },
+        "rateLimitPerMinute": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 120
+        }
+      }
+    },
+    "humanHandoff": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "mode": { "type": "string", "enum": ["email", "live_chat", "ticket", "external_url"] },
+        "destinationEmail": { "type": "string" },
+        "supportUrl": { "type": "string" },
+        "autoEscalateKeywords": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "consecutiveFallbacksBeforeHandoff": { "type": "integer", "minimum": 1, "maximum": 5 }
+      }
+    },
+    "localization": {
+      "type": "object",
+      "properties": {
+        "defaultLanguage": { "type": "string" },
+        "supportedLanguages": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "translations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "properties": {
+        "website": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "allowedDomains": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "requireDomainValidation": { "type": "boolean" }
+          }
+        },
+        "telegram": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "botUsername": { "type": "string" },
+            "bridgeEndpoint": { "type": "string" },
+            "status": { "type": "string", "enum": ["configured", "unconfigured", "bridge_required"] }
+          }
+        },
+        "whatsapp": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "phoneNumberId": { "type": "string" },
+            "businessAccountId": { "type": "string" },
+            "bridgeEndpoint": { "type": "string" },
+            "status": { "type": "string", "enum": ["configured", "unconfigured", "bridge_required"] }
+          }
+        },
+        "webhook": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "endpointUrl": { "type": "string" },
+            "method": { "type": "string", "enum": ["POST", "PUT"] },
+            "events": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "customHeaders": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "sessionPersistence": { "type": "string", "enum": ["session", "local", "memory_only"] },
+        "retentionDays": { "type": "integer", "minimum": 0, "maximum": 365 },
+        "collectAnalytics": { "type": "boolean" },
+        "maskPii": { "type": "boolean" },
+        "privacyPolicyUrl": { "type": "string" }
+      }
+    }
+  }
+}

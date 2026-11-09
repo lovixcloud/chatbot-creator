@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bot_mw7llhax_t2fm4",
+  "name": "E-Commerce Shopping Assistant",
+  "description": "Zero-framework customer support chatbot instance.",
+  "status": "draft",
+  "version": 1,
+  "createdAt": "2026-11-08T08:56:22.233Z",
+  "updatedAt": "2026-11-08T08:56:22.233Z",
+  "identity": {
+    "assistantName": "ShopBot",
+    "businessName": "Aura Lifestyle",
+    "businessCategory": "E-commerce",
+    "role": "Personal Shopping Concierge",
+    "personality": "friendly",
+    "tone": "empathetic",
+    "avatarUrl": "",
+    "businessLogoUrl": "",
+    "fallbackMessage": "I couldn't locate that item. Tell me what style or category you are looking for!",
+    "errorMessage": "Oops, something went wrong with the shopping catalog.",
+    "handoffMessage": "Let me connect you with a personal shopping stylist.",
+    "endingMessage": "Enjoy your shopping! Let me know if you need any other recommendations."
+  },
+  "appearance": {
+    "theme": "light",
+    "position": "bottom-right",
+    "primaryColor": "#7c3aed",
+    "secondaryColor": "#6d28d9",
+    "backgroundColor": "#ffffff",
+    "textColor": "#1e293b",
+    "userBubbleColor": "#2563eb",
+    "botBubbleColor": "#f1f5f9",
+    "borderRadius": 16,
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "headerTitle": "E-Commerce Shopping Assistant",
+    "headerSubtitle": "Online • Typically replies instantly",
+    "launcherIcon": "sparkle",
+    "launcherText": "Shopping Assistant",
+    "customCss": "",
+    "width": 380,
+    "height": 580
+  },
+  "welcomeExperience": {
+    "greeting": "Hi there! ✨ Looking for something special today? I can help find the perfect product or deal.",
+    "showWelcomeScreen": true,
+    "welcomeTitle": "Welcome to Acme Support",
+    "welcomeSubtitle": "Ask a question or select an option below to get started.",
+    "conversationStarters": [
+      "Show trending items",
+      "Do you offer free shipping?",
+      "Current discount codes"
+    ],
+    "askUserName": false,
+    "askUserEmail": false,
+    "consentMessage": "By chatting, you consent to our privacy policy."
+  },
+  "knowledgeBase": [
+    {
+      "id": "kb_discounts",
+      "question": "Are there any active discount codes or sales?",
+      "answer": "Yes! Use code WELCOME10 at checkout to get 10% off your first order over $50.",
+      "category": "Promotions",
+      "keywords": [
+        "discount",
+        "coupon",
+        "promo",
+        "code",
+        "sale",
+        "deal",
+        "offer"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "kb_free_ship",
+      "question": "Do you offer free shipping?",
+      "answer": "All domestic orders over $75 qualify for complimentary standard express shipping.",
+      "category": "Shipping",
+      "keywords": [
+        "free",
+        "shipping",
+        "delivery",
+        "cost",
+        "minimum"
+      ],
+      "priority": 5
+    }
+  ],
+  "conversationFlows": [
+    {
+      "id": "flow_support_ticket",
+      "title": "Submit Support Ticket",
+      "trigger": {
+        "type": "button",
+        "value": "submit_ticket"
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "type": "question",
+          "text": "I would be happy to help you create a ticket. What issue are you experiencing today?",
+          "nextStepId": "step_2"
+        },
+        {
+          "id": "step_2",
+          "type": "input_capture",
+          "inputType": "email",
+          "variableName": "user_email",
+          "text": "Thanks! What is your email address so our team can follow up with you?",
+          "nextStepId": "step_3"
+        },
+        {
+          "id": "step_3",
+          "type": "message",
+          "text": "Got it! Your inquiry has been forwarded to our support queue. An agent will respond within 24 hours.",
+          "nextStepId": "end"
+        }
+      ]
+    }
+  ],
+  "businessRules": {
+    "timezone": "UTC",
+    "operatingHours": {
+      "enabled": false,
+      "schedule": {
+        "monday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "tuesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "wednesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "thursday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "friday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "saturday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        },
+        "sunday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        }
+      },
+      "afterHoursMessage": "We are currently outside our standard business hours. Leave your email and question, and we will reply as soon as we open!"
+    },
+    "confidenceThreshold": 0.35,
+    "maxHistoryItems": 30,
+    "rateLimitPerMinute": 20
+  },
+  "humanHandoff": {
+    "enabled": true,
+    "mode": "email",
+    "destinationEmail": "support@example.com",
+    "supportUrl": "https://example.com/support",
+    "autoEscalateKeywords": [
+      "agent",
+      "human",
+      "representative",
+      "operator",
+      "supervisor"
+    ],
+    "consecutiveFallbacksBeforeHandoff": 2
+  },
+  "localization": {
+    "defaultLanguage": "en",
+    "supportedLanguages": [
+      "en",
+      "es",
+      "fr",
+      "de"
+    ],
+    "translations": {
+      "en": {
+        "placeholder": "Type your message...",
+        "send": "Send",
+        "restart": "Restart conversation",
+        "poweredBy": "Zero-Framework Chatbot"
+      },
+      "es": {
+        "placeholder": "Escribe tu mensaje...",
+        "send": "Enviar",
+        "restart": "Reiniciar conversación",
+        "poweredBy": "Chatbot Creador"
+      }
+    }
+  },
+  "integrations": {
+    "website": {
+      "enabled": true,
+      "allowedDomains": [
+        "*"
+      ],
+      "requireDomainValidation": false
+    },
+    "telegram": {
+      "enabled": false,
+      "botUsername": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "phoneNumberId": "",
+      "businessAccountId": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "webhook": {
+      "enabled": false,
+      "endpointUrl": "",
+      "method": "POST",
+      "events": [
+        "on_message",
+        "on_handoff"
+      ],
+      "customHeaders": {}
+    }
+  },
+  "privacy": {
+    "sessionPersistence": "session",
+    "retentionDays": 30,
+    "collectAnalytics": true,
+    "maskPii": false,
+    "privacyPolicyUrl": "https://example.com/privacy"
+  }
+}

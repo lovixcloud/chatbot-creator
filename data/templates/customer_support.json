@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "bot_mw7llh8t_hd8rh",
+  "name": "Customer Support Assistant",
+  "description": "Zero-framework customer support chatbot instance.",
+  "status": "draft",
+  "version": 1,
+  "createdAt": "2026-11-08T08:56:22.157Z",
+  "updatedAt": "2026-11-08T08:56:22.231Z",
+  "identity": {
+    "assistantName": "Support Hero",
+    "businessName": "Nova Retail",
+    "businessCategory": "Customer Support",
+    "role": "Customer Support Specialist",
+    "personality": "friendly",
+    "tone": "empathetic",
+    "avatarUrl": "",
+    "businessLogoUrl": "",
+    "fallbackMessage": "I'm not completely certain about that. Let me connect you with our human team so you get the exact right answer.",
+    "errorMessage": "I encountered a brief connection hiccup. Please try asking again.",
+    "handoffMessage": "Transferring you to an available customer support representative. One moment please...",
+    "endingMessage": "Thank you for reaching out! Is there anything else we can assist you with?"
+  },
+  "appearance": {
+    "theme": "light",
+    "position": "bottom-right",
+    "primaryColor": "#2563eb",
+    "secondaryColor": "#1d4ed8",
+    "backgroundColor": "#ffffff",
+    "textColor": "#1e293b",
+    "userBubbleColor": "#2563eb",
+    "botBubbleColor": "#f1f5f9",
+    "borderRadius": 16,
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "headerTitle": "Customer Support Assistant",
+    "headerSubtitle": "Online • Typically replies instantly",
+    "launcherIcon": "headset",
+    "launcherText": "Customer Support",
+    "customCss": "",
+    "width": 380,
+    "height": 580
+  },
+  "welcomeExperience": {
+    "greeting": "Hello there! 👋 Welcome to Nova Support. How may we assist you today?",
+    "showWelcomeScreen": true,
+    "welcomeTitle": "Welcome to Acme Support",
+    "welcomeSubtitle": "Ask a question or select an option below to get started.",
+    "conversationStarters": [
+      "Check order status",
+      "Return & refund policy",
+      "Speak with an agent"
+    ],
+    "askUserName": false,
+    "askUserEmail": false,
+    "consentMessage": "By chatting, you consent to our privacy policy."
+  },
+  "knowledgeBase": [
+    {
+      "id": "kb_order_status",
+      "question": "How do I track my order status?",
+      "answer": "You can check your order status anytime by clicking the tracking link sent in your confirmation email, or provide your order number here!",
+      "category": "Orders",
+      "keywords": [
+        "track",
+        "order",
+        "status",
+        "shipping",
+        "package",
+        "delivery"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "kb_returns",
+      "question": "What is your return policy?",
+      "answer": "We provide a 30-day hassle-free return window on all unworn, original condition items with tags attached.",
+      "category": "Returns",
+      "keywords": [
+        "return",
+        "refund",
+        "exchange",
+        "policy",
+        "money back"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "kb_shipping_time",
+      "question": "How long does shipping take?",
+      "answer": "Standard shipping takes 3-5 business days. Express shipping takes 1-2 business days across North America.",
+      "category": "Shipping",
+      "keywords": [
+        "shipping",
+        "delivery",
+        "time",
+        "days",
+        "speed",
+        "fast"
+      ],
+      "priority": 4
+    }
+  ],
+  "conversationFlows": [
+    {
+      "id": "flow_support_ticket",
+      "title": "Submit Support Ticket",
+      "trigger": {
+        "type": "button",
+        "value": "submit_ticket"
+      },
+      "steps": [
+        {
+          "id": "step_1",
+          "type": "question",
+          "text": "I would be happy to help you create a ticket. What issue are you experiencing today?",
+          "nextStepId": "step_2"
+        },
+        {
+          "id": "step_2",
+          "type": "input_capture",
+          "inputType": "email",
+          "variableName": "user_email",
+          "text": "Thanks! What is your email address so our team can follow up with you?",
+          "nextStepId": "step_3"
+        },
+        {
+          "id": "step_3",
+          "type": "message",
+          "text": "Got it! Your inquiry has been forwarded to our support queue. An agent will respond within 24 hours.",
+          "nextStepId": "end"
+        }
+      ]
+    }
+  ],
+  "businessRules": {
+    "timezone": "UTC",
+    "operatingHours": {
+      "enabled": false,
+      "schedule": {
+        "monday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "tuesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "wednesday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "thursday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "friday": {
+          "open": "09:00",
+          "close": "18:00",
+          "closed": false
+        },
+        "saturday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        },
+        "sunday": {
+          "open": "10:00",
+          "close": "16:00",
+          "closed": true
+        }
+      },
+      "afterHoursMessage": "We are currently outside our standard business hours. Leave your email and question, and we will reply as soon as we open!"
+    },
+    "confidenceThreshold": 0.35,
+    "maxHistoryItems": 30,
+    "rateLimitPerMinute": 20
+  },
+  "humanHandoff": {
+    "enabled": true,
+    "mode": "email",
+    "destinationEmail": "support@example.com",
+    "supportUrl": "https://example.com/support",
+    "autoEscalateKeywords": [
+      "agent",
+      "human",
+      "representative",
+      "operator",
+      "supervisor"
+    ],
+    "consecutiveFallbacksBeforeHandoff": 2
+  },
+  "localization": {
+    "defaultLanguage": "en",
+    "supportedLanguages": [
+      "en",
+      "es",
+      "fr",
+      "de"
+    ],
+    "translations": {
+      "en": {
+        "placeholder": "Type your message...",
+        "send": "Send",
+        "restart": "Restart conversation",
+        "poweredBy": "Zero-Framework Chatbot"
+      },
+      "es": {
+        "placeholder": "Escribe tu mensaje...",
+        "send": "Enviar",
+        "restart": "Reiniciar conversación",
+        "poweredBy": "Chatbot Creador"
+      }
+    }
+  },
+  "integrations": {
+    "website": {
+      "enabled": true,
+      "allowedDomains": [
+        "*"
+      ],
+      "requireDomainValidation": false
+    },
+    "telegram": {
+      "enabled": false,
+      "botUsername": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "whatsapp": {
+      "enabled": false,
+      "phoneNumberId": "",
+      "businessAccountId": "",
+      "bridgeEndpoint": "",
+      "status": "unconfigured"
+    },
+    "webhook": {
+      "enabled": false,
+      "endpointUrl": "",
+      "method": "POST",
+      "events": [
+        "on_message",
+        "on_handoff"
+      ],
+      "customHeaders": {}
+    }
+  },
+  "privacy": {
+    "sessionPersistence": "session",
+    "retentionDays": 30,
+    "collectAnalytics": true,
+    "maskPii": false,
+    "privacyPolicyUrl": "https://example.com/privacy"
+  }
+}
