@@ -1,0 +1,112 @@
+# Deploy the frontend and PHP API to one shared-hosting document root.
+name: Deploy application to shared hosting
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment: production
+    runs-on: ubuntu-latest
+    env:
+      FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+      CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
+      DB_DRIVER: ${{ vars.DB_DRIVER }}
+      DB_HOST: ${{ vars.DB_HOST }}
+      DB_PORT: ${{ vars.DB_PORT }}
+      DB_DATABASE: ${{ vars.DB_DATABASE }}
+      DB_USERNAME: ${{ vars.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      PAYPAL_MODE: ${{ vars.PAYPAL_MODE }}
+      PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+      PAYPAL_CLIENT_SECRET: ${{ secrets.PAYPAL_CLIENT_SECRET }}
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_SERVER_DIR: ${{ vars.FTP_SERVER_DIR }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: curl, pdo_mysql
+          tools: composer
+
+      - name: Validate deployment configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(FRONTEND_URL CORS_ORIGIN DB_DRIVER DB_HOST DB_PORT DB_DATABASE DB_USERNAME DB_PASSWORD JWT_SECRET PAYPAL_MODE PAYPAL_CLIENT_ID PAYPAL_CLIENT_SECRET FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR)
+          for name in "${required[@]}"; do
+            if [[ -z "${!name:-}" ]]; then
+              echo "::error::Missing production Environment variable or secret: ${name}"
+              exit 1
+            fi
+          done
+
+      - name: Install production dependencies
+        working-directory: backend
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Build deployment package
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf deploy
+          mkdir -p deploy
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='deploy/' \
+            --exclude='backend/.env' \
+            --exclude='backend/database/app.sqlite' \
+            --exclude='backend/tests/' \
+            --exclude='tests/' \
+            --exclude='*.sqlite' \
+            ./ deploy/
+
+          dotenv_quote() {
+            local value="$1"
+            value="${value//\'/\'\\\'\'}"
+            printf "'%s'" "$value"
+          }
+
+          {
+            printf 'FRONTEND_URL=%s\n' "$(dotenv_quote "$FRONTEND_URL")"
+            printf 'CORS_ORIGIN=%s\n' "$(dotenv_quote "$CORS_ORIGIN")"
+            printf 'DB_DRIVER=%s\n' "$(dotenv_quote "$DB_DRIVER")"
+            printf 'DB_HOST=%s\n' "$(dotenv_quote "$DB_HOST")"
+            printf 'DB_PORT=%s\n' "$(dotenv_quote "$DB_PORT")"
+            printf 'DB_DATABASE=%s\n' "$(dotenv_quote "$DB_DATABASE")"
+            printf 'DB_USERNAME=%s\n' "$(dotenv_quote "$DB_USERNAME")"
+            printf 'DB_PASSWORD=%s\n' "$(dotenv_quote "$DB_PASSWORD")"
+            printf 'JWT_SECRET=%s\n' "$(dotenv_quote "$JWT_SECRET")"
+            printf 'PAYPAL_MODE=%s\n' "$(dotenv_quote "$PAYPAL_MODE")"
+            printf 'PAYPAL_CLIENT_ID=%s\n' "$(dotenv_quote "$PAYPAL_CLIENT_ID")"
+            printf 'PAYPAL_CLIENT_SECRET=%s\n' "$(dotenv_quote "$PAYPAL_CLIENT_SECRET")"
+          } > deploy/backend/.env
+          chmod 600 deploy/backend/.env
+
+      - name: Deploy frontend and backend
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ env.FTP_SERVER }}
+          username: ${{ env.FTP_USERNAME }}
+          password: ${{ env.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ env.FTP_SERVER_DIR }}
+          local-dir: ./deploy/
+          log-level: minimal
